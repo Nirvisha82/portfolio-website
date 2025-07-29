@@ -9,17 +9,55 @@
   --foreground-dark: #f8fafc;
 }
 
-/* Clean Body */
+/* Enhanced Light Mode Body - Smooth flowing gradient */
 body {
-  background-color: var(--background-light);
+  background: linear-gradient(135deg, #ffffff 0%, #f8fafc 25%, #f1f5f9 50%, #f8fafc 75%, #ffffff 100%);
   color: var(--foreground-light);
   transition: background-color 0.3s ease, color 0.3s ease;
   margin: 0;
   padding: 0;
   min-height: 100vh;
   position: relative;
+  overflow-x: hidden;
 }
 
+/* Light Mode - MORE VISIBLE flowing pattern */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: -2;
+  background: 
+    radial-gradient(circle at 20% 80%, rgba(139, 92, 246, 0.15) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(59, 130, 246, 0.12) 0%, transparent 50%),
+    radial-gradient(circle at 40% 40%, rgba(16, 185, 129, 0.08) 0%, transparent 50%),
+    linear-gradient(45deg, transparent 0%, rgba(139, 92, 246, 0.06) 50%, transparent 100%);
+  animation: lightFlow 20s ease-in-out infinite;
+  opacity: 1;
+}
+
+/* Light Mode - NO GRID, just flowing gradients like dark mode */
+body::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: -1;
+  background: 
+    radial-gradient(circle at 20% 20%, rgba(139, 92, 246, 0.02) 0%, transparent 30%),
+    radial-gradient(circle at 80% 80%, rgba(59, 130, 246, 0.015) 0%, transparent 30%),
+    radial-gradient(circle at 50% 50%, rgba(16, 185, 129, 0.01) 0%, transparent 25%);
+  animation: lightBreathe 8s ease-in-out infinite;
+}
+
+/* Dark Mode Body */
 .dark body {
   background: linear-gradient(135deg, #0f0b27 0%, #1a1332 25%, #231944  50%, #1a1332 75%, #0f0b27 100%);
   color: var(--foreground-dark);
@@ -32,7 +70,7 @@ html.dark body {
   color: var(--foreground-dark);
 }
 
-/* Unique Grid Pattern Background Animation */
+/* Dark Mode Grid Pattern Background Animation */
 .dark body::before {
   content: '';
   position: fixed;
@@ -66,7 +104,101 @@ html.dark body {
   animation: breathe 8s ease-in-out infinite;
 }
 
-/* Constellation Effect */
+/* LIGHT MODE - Elegant floating particles */
+.light-particles {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: -1;
+  opacity: 0.6;
+}
+
+.particle {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: linear-gradient(45deg, rgba(139, 92, 246, 0.4), rgba(59, 130, 246, 0.3));
+  border-radius: 50%;
+  animation: particleFloat 12s ease-in-out infinite;
+}
+
+.particle::before {
+  content: '';
+  position: absolute;
+  top: -1px;
+  left: -1px;
+  width: 4px;
+  height: 4px;
+  background: radial-gradient(circle, rgba(139, 92, 246, 0.1) 0%, transparent 70%);
+  border-radius: 50%;
+  animation: particleGlow 8s ease-in-out infinite;
+}
+
+/* Light Mode - Subtle accent lines */
+.light-accent-lines {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: -1;
+  opacity: 0.15;
+}
+
+.accent-line {
+  position: absolute;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(139, 92, 246, 0.2), transparent);
+  animation: lineFlow 15s ease-in-out infinite;
+}
+
+/* Light Mode Constellation Effect - MATCH dark mode visibility */
+.light-constellation {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: -1;
+  opacity: 0.6;
+}
+
+.light-constellation-dot {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  background: rgba(139, 92, 246, 0.6);
+  border-radius: 50%;
+  animation: lightTwinkle 4s ease-in-out infinite;
+}
+
+.light-constellation-dot::after {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  width: 7px;
+  height: 7px;
+  background: radial-gradient(circle, rgba(139, 92, 246, 0.3) 0%, transparent 70%);
+  border-radius: 50%;
+  animation: lightGlow 6s ease-in-out infinite;
+}
+
+/* Light mode constellation connecting lines - MATCH dark mode */
+.light-constellation-line {
+  position: absolute;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(139, 92, 246, 0.3), transparent);
+  animation: lightFadeInOut 8s ease-in-out infinite;
+  transform-origin: left;
+}
+
+/* Constellation Effect for Dark Mode */
 .dark-constellation {
   position: fixed;
   top: 0;
@@ -108,26 +240,6 @@ html.dark body {
   transform-origin: left;
 }
 
-/* VERY SUBTLE Background Enhancement */
-body::before {
-  content: '';
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: -1;
-  opacity: 0.015;
-  background: radial-gradient(circle at 30% 20%, rgba(139, 92, 246, 0.1) 0%, transparent 50%);
-  animation: subtleMove 25s ease-in-out infinite;
-}
-
-.dark body::before {
-  opacity: 0.03;
-  background: radial-gradient(circle at 70% 80%, rgba(139, 92, 246, 0.1) 0%, transparent 60%);
-}
-
 /* Optional: Very subtle floating dots (barely visible) */
 .subtle-dots {
   position: fixed;
@@ -137,11 +249,12 @@ body::before {
   height: 100%;
   pointer-events: none;
   z-index: -1;
-  opacity: 0.6;
+  opacity: 0.3;
   background-image: 
-    radial-gradient(1px 1px at 100px 200px, rgba(139, 92, 246, 0.2), transparent),
-    radial-gradient(1px 1px at 300px 400px, rgba(59, 130, 246, 0.2), transparent),
-    radial-gradient(1px 1px at 600px 100px, rgba(139, 92, 246, 0.2), transparent);
+    radial-gradient(1px 1px at 100px 200px, rgba(139, 92, 246, 0.15), transparent),
+    radial-gradient(1px 1px at 300px 400px, rgba(59, 130, 246, 0.15), transparent),
+    radial-gradient(1px 1px at 600px 100px, rgba(16, 185, 129, 0.1), transparent),
+    radial-gradient(1px 1px at 450px 350px, rgba(139, 92, 246, 0.1), transparent);
   background-size: 800px 600px;
   animation: dotsFloat 30s linear infinite;
 }
@@ -210,6 +323,18 @@ body::before {
   );
 }
 
+/* LIGHT MODE FLOWING FOOTER */
+.flowing-footer {
+  background: linear-gradient(180deg, 
+    transparent 0%, 
+    rgba(248, 250, 252, 0.8) 20%,
+    rgba(241, 245, 249, 0.9) 40%,
+    rgba(226, 232, 240, 0.95) 60%,
+    rgba(203, 213, 225, 0.98) 80%,
+    rgba(148, 163, 184, 1) 100%
+  );
+}
+
 /* Fix the flowing footer to maintain dark theme */
 .dark .flowing-footer {
   background: linear-gradient(180deg, 
@@ -249,7 +374,105 @@ body::before {
   animation: float 3s ease-in-out infinite;
 }
 
-/* New Animation Keyframes */
+/* LIGHT MODE CONSTELLATION ANIMATIONS - MATCH dark mode */
+@keyframes lightTwinkle {
+  0%, 100% { 
+    opacity: 0.3;
+    transform: scale(1);
+  }
+  50% { 
+    opacity: 1;
+    transform: scale(1.5);
+  }
+}
+
+@keyframes lightGlow {
+  0%, 100% { 
+    opacity: 0.1;
+    transform: scale(1);
+  }
+  50% { 
+    opacity: 0.4;
+    transform: scale(2);
+  }
+}
+
+@keyframes lightFadeInOut {
+  0%, 100% { 
+    opacity: 0;
+    transform: scaleX(0);
+  }
+  50% { 
+    opacity: 0.3;
+    transform: scaleX(1);
+  }
+}
+
+/* LIGHT MODE SPECIFIC ANIMATIONS */
+@keyframes lightFlow {
+  0%, 100% { 
+    transform: rotate(0deg) scale(1);
+    opacity: 0.8;
+  }
+  50% { 
+    transform: rotate(0.5deg) scale(1.01);
+    opacity: 1;
+  }
+}
+
+@keyframes lightBreathe {
+  0%, 100% { 
+    opacity: 0.8;
+    transform: scale(1);
+  }
+  50% { 
+    opacity: 1;
+    transform: scale(1.05);
+  }
+}
+
+@keyframes particleFloat {
+  0%, 100% { 
+    transform: translateY(0px) translateX(0px) scale(1);
+    opacity: 0.3;
+  }
+  25% { 
+    transform: translateY(-15px) translateX(5px) scale(1.2);
+    opacity: 0.6;
+  }
+  50% { 
+    transform: translateY(-8px) translateX(-3px) scale(0.8);
+    opacity: 1;
+  }
+  75% { 
+    transform: translateY(-20px) translateX(8px) scale(1.1);
+    opacity: 0.4;
+  }
+}
+
+@keyframes particleGlow {
+  0%, 100% { 
+    opacity: 0.05;
+    transform: scale(1);
+  }
+  50% { 
+    opacity: 0.2;
+    transform: scale(2);
+  }
+}
+
+@keyframes lineFlow {
+  0%, 100% { 
+    opacity: 0;
+    transform: translateX(-100px) scaleX(0);
+  }
+  50% { 
+    opacity: 0.3;
+    transform: translateX(0px) scaleX(1);
+  }
+}
+
+/* DARK MODE ANIMATIONS */
 @keyframes gridMove {
   0% { 
     transform: translateX(0px) translateY(0px);
@@ -358,17 +581,6 @@ body::before {
   50% { transform: rotate(10deg); }
   60% { transform: rotate(0deg); }
   100% { transform: rotate(0deg); }
-}
-
-@keyframes breathe {
-  0%, 100% { 
-    opacity: 0.2;
-    transform: scale(1);
-  }
-  50% { 
-    opacity: 0.6;
-    transform: scale(1.2);
-  }
 }
 
 .animate-breathe {

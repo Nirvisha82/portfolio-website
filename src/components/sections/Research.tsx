@@ -1,6 +1,6 @@
 'use client'
 import { useState, useEffect } from 'react'
-import { ExternalLink, Calendar, Users, BookOpen, ChevronLeft, ChevronRight } from 'lucide-react'
+import { ExternalLink, Calendar, BookOpen, ChevronLeft, ChevronRight } from 'lucide-react'
 
 export function Research() {
   const [currentPaper, setCurrentPaper] = useState(0)
@@ -36,43 +36,43 @@ export function Research() {
   const publications = [
     {
       id: 1,
-      title: "Advanced Neural Networks for RNA-Binding Protein Prediction",
-      journal: "Nature Biotechnology",
-      year: "2024",
-      authors: "N. Sharma, X. Fan, et al.",
-      description: "Novel deep learning approach for predicting RNA-binding protein sites using transformer-based models and achieving 92% accuracy.",
-      tech: ["PyTorch", "Transformers", "Bioinformatics", "ESM3"],
-      color: "from-purple-500 to-indigo-600"
+      title: "Comparative Analysis of LSTM, GRU and Transformer Models for German to English Language Translation",
+      journal: "2023 3rd Asian Conference on Innovation in Technology (ASIANCON)",
+      year: "2023",
+      description: "Comprehensive comparative study evaluating Neural Machine Translation techniques using RNN-based LSTM, GRU models, and Transformer architecture. Trained on over 220K sentence pairs and evaluated using BLEU and ROUGE metrics. Results demonstrated that Transformers significantly outperformed RNN variants in translation fluency and contextual accuracy.",
+      tech: ["Neural Machine Translation", "LSTM", "GRU", "Transformer", "BLEU", "ROUGE", "Sequence-to-Sequence"],
+      color: "from-purple-500 to-indigo-600",
+      url: "https://ieeexplore.ieee.org/document/10270018"
     },
     {
       id: 2,
-      title: "Scalable Microservices Architecture for Financial Data Processing",
-      journal: "IEEE Transactions on Software Engineering",
+      title: "Transformer-Based Text Summary Generation for Videos",
+      journal: "2024 International Conference on Current Trends in Advanced Computing (ICCTAC)",
       year: "2024",
-      authors: "N. Sharma, A. Johnson, B. Chen",
-      description: "Comprehensive framework for processing high-volume financial data using containerized microservices and achieving 60% performance improvement.",
-      tech: ["Kubernetes", "Docker", "Apache Kafka", "MongoDB"],
-      color: "from-purple-500 to-blue-600"
+      description: "Novel Transformer-based pipeline for generating concise textual summaries from videos with frequent scene transitions. System identifies keyframes using clustering, extracts features via InceptionV3, and generates captions using Transformer encoder-decoder. Achieved BLEU-4 score of 52.17 and ROUGE-F1 score of 40.21.",
+      tech: ["Video Summarization", "Transformer", "InceptionV3", "Keyframe Extraction", "Encoder-Decoder", "Clustering"],
+      color: "from-purple-500 to-blue-600",
+      url: "https://ieeexplore.ieee.org/abstract/document/10581200"
     },
     {
       id: 3,
-      title: "Machine Learning Approaches for Financial News Sentiment Analysis",
-      journal: "Journal of Financial Technology",
+      title: "A Semi-Supervised GAN Architecture for Video Classification",
+      journal: "2022 IEEE International Conference on Advancements in Smart, Secure and Intelligent Computing (ASSIC)",
       year: "2023",
-      authors: "N. Sharma, R. Patel, M. Kumar",
-      description: "Comparative study of transformer models for financial sentiment analysis with novel preprocessing techniques and achieving 0.7 Pearson correlation.",
-      tech: ["T5", "BERT", "Financial NLP", "Python"],
-      color: "from-purple-500 to-cyan-600"
+      description: "Innovative semi-supervised learning approach using modified MoCoGAN architecture for video classification with minimal labeled data. Discriminator performs dual tasks of distinguishing real/fake videos and classifying across six categories. Achieved over 62% accuracy with 50% labeled data, outperforming traditional supervised baselines.",
+      tech: ["Semi-Supervised Learning", "GAN", "MoCoGAN", "Video Classification", "Adversarial Training", "Discriminator"],
+      color: "from-purple-500 to-cyan-600",
+      url: "https://ieeexplore.ieee.org/document/10074051"
     },
     {
       id: 4,
-      title: "Distributed Computing Framework for Real-time Data Analytics",
-      journal: "ACM Transactions on Computer Systems",
+      title: "LearnEasy: A Learning Platform for Autistic Children",
+      journal: "AIP Conference Proceedings",
       year: "2023",
-      authors: "N. Sharma, K. Singh, L. Wang",
-      description: "High-performance distributed computing system for processing streaming data with sub-millisecond latency and 99.9% availability.",
-      tech: ["Apache Spark", "Kafka Streams", "Redis", "Elasticsearch"],
-      color: "from-indigo-500 to-purple-600"
+      description: "Comprehensive dual-user web application designed for early Autism Spectrum Disorder diagnosis and personalized learning support. Utilizes AdaBoost and SVM models to predict autism severity levels. Features interactive emotion, sound, and audio-based quizzes tailored to individual severity levels with comprehensive progress tracking for caregivers.",
+      tech: ["Autism Spectrum Disorder", "AdaBoost", "SVM", "Machine Learning",  "Educational Technology", "Healthcare AI"],
+      color: "from-indigo-500 to-purple-600",
+      url: "https://pubs.aip.org/aip/acp/article-abstract/2981/1/020025/2929172/LearnEasy-A-learning-platform-for-autistic"
     }
   ]
 
@@ -132,8 +132,9 @@ export function Research() {
             isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
           }`}
         >
-          <span className="inline-block px-4 py-2 bg-indigo-100 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-400 rounded-full text-sm font-medium mb-4">
-            📚 Research Contributions
+          <span className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-purple-100 to-blue-100 dark:from-purple-900/30 dark:to-blue-900/30 text-purple-600 dark:text-purple-400 rounded-full text-sm font-medium mb-4 border border-purple-200 dark:border-purple-800">
+            <span className="animate-bounce">📚</span>
+            Research Contributions
           </span>
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
             Published Research Papers
@@ -200,17 +201,6 @@ export function Research() {
                 {/* Paper Card */}
                 <div className="w-full h-full bg-white dark:bg-gray-900 backdrop-blur-sm rounded-xl shadow-2xl border border-gray-200 dark:border-gray-700 relative overflow-hidden">
                   
-                  {/* Subtle gradient hover effect */}
-                  <div 
-                    className="absolute inset-0 rounded-xl bg-gradient-to-r from-purple-500 to-indigo-600 pointer-events-none"
-                    style={{
-                      opacity: 0,
-                      transitionProperty: 'opacity',
-                      transitionDuration: '500ms',
-                      transitionTimingFunction: 'ease-in-out'
-                    }}
-                  ></div>
-                  
                   {/* Paper Content */}
                   <div className="p-6 relative z-10 h-full flex flex-col">
                     
@@ -233,11 +223,6 @@ export function Research() {
                       <p className="text-sm font-medium text-purple-600 dark:text-purple-400 italic mb-2">
                         📰 {paper.journal}
                       </p>
-                      
-                      <div className="flex items-center gap-2">
-                        <Users size={12} className="text-gray-500" />
-                        <span className="text-xs text-gray-600 dark:text-gray-300">{paper.authors}</span>
-                      </div>
                     </div>
 
                     {/* Description */}
@@ -247,28 +232,16 @@ export function Research() {
                       </p>
                     </div>
 
-                    {/* Technologies */}
+                    {/* Keywords */}
                     <div className="mb-4">
                       <h4 className="font-semibold text-gray-900 dark:text-white mb-2 text-xs">
-                        Technologies & Methods
+                        Keywords
                       </h4>
                       <div className="flex flex-wrap gap-1">
                         {paper.tech.map((tech, idx) => (
                           <span
                             key={idx}
-                            className="px-2 py-1 bg-gray-100 dark:bg-gray-800 text-xs text-gray-700 dark:text-gray-300 rounded-md border border-gray-200 dark:border-gray-700"
-                            style={{
-                              borderColor: 'rgb(209 213 219)',
-                              transitionProperty: 'border-color',
-                              transitionDuration: '300ms',
-                              transitionTimingFunction: 'ease-in-out'
-                            }}
-                            onMouseEnter={(e) => {
-                              e.currentTarget.style.borderColor = 'rgb(196 181 253)' // purple-300
-                            }}
-                            onMouseLeave={(e) => {
-                              e.currentTarget.style.borderColor = 'rgb(209 213 219)' // gray-300
-                            }}
+                            className="px-2 py-1 bg-gray-100 dark:bg-gray-800 text-xs text-gray-700 dark:text-gray-300 rounded-md border border-gray-200 dark:border-gray-700 hover:border-purple-300 dark:hover:border-purple-500 transition-all duration-300"
                           >
                             {tech}
                           </span>
@@ -278,32 +251,21 @@ export function Research() {
 
                     {/* Action Button */}
                     <div className="mt-auto">
-                      <button 
-                        className="w-full bg-gradient-to-r from-gray-900 to-gray-800 dark:from-white dark:to-gray-100 text-white dark:text-gray-900 py-2 rounded-lg font-semibold shadow-lg flex items-center justify-center gap-2 text-sm relative overflow-hidden group"
-                        style={{
-                          transform: 'scale(1)',
-                          transitionProperty: 'transform',
-                          transitionDuration: '300ms',
-                          transitionTimingFunction: 'ease-in-out'
-                        }}
-                        onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.05)'}
-                        onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
+                      <a 
+                        href={paper.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="w-full bg-gradient-to-r from-gray-900 to-gray-800 dark:from-white dark:to-gray-100 text-white dark:text-gray-900 py-2 rounded-lg font-semibold shadow-lg flex items-center justify-center gap-2 text-sm relative overflow-hidden group transition-all duration-300 hover:scale-105"
                       >
                         <span 
-                          className={`absolute inset-0 bg-gradient-to-r ${paper.color}`}
-                          style={{
-                            opacity: 0,
-                            transitionProperty: 'opacity',
-                            transitionDuration: '500ms',
-                            transitionTimingFunction: 'ease-in-out'
-                          }}
+                          className={`absolute inset-0 bg-gradient-to-r ${paper.color} opacity-0 group-hover:opacity-100 transition-opacity duration-500`}
                         ></span>
                         <span className="relative z-10 flex items-center gap-2">
                           <BookOpen size={14} />
                           Read Full Paper
                           <ExternalLink size={12} />
                         </span>
-                      </button>
+                      </a>
                     </div>
                   </div>
 
@@ -320,7 +282,7 @@ export function Research() {
           </div>
         </div>
 
-        {/* Google Scholar Link */}
+        {/* Google Scholar Link - SIMPLIFIED */}
         <div 
           className={`text-center transition-all duration-1000 ${
             isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
@@ -328,13 +290,16 @@ export function Research() {
           style={{ transitionDelay: '600ms' }}
         >
           <a 
-            href="https://scholar.google.com" 
+            href="https://scholar.google.com/citations?user=levmF9MAAAAJ&hl=en" 
             target="_blank" 
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white px-8 py-4 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-purple-500/25"
           >
-            <BookOpen size={18} />
-            View Complete Publications on Google Scholar
+            {/* Google Scholar Icon */}
+            <svg width={18} height={18} viewBox="0 0 24 24" fill="currentColor" className="text-white">
+              <path d="M5.242 13.769L0 9.5 12 0l12 9.5-5.242 4.269C17.548 11.249 14.978 9.5 12 9.5c-2.977 0-5.548 1.748-6.758 4.269zM12 10a7 7 0 1 0 0 14 7 7 0 0 0 0-14z"/>
+            </svg>
+            Google Scholar Profile
             <ExternalLink size={16} />
           </a>
         </div>

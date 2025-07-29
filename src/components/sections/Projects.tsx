@@ -124,12 +124,12 @@ export function Projects() {
 
   if (!mounted) {
     return (
-      <section id="projects" className="py-16 px-6 relative overflow-hidden">
+      <section id="projects" className="py-20 px-6 relative overflow-hidden">
         <div className="max-w-6xl mx-auto relative z-10">
-          <div className="text-center mb-12">
+          <div className="text-center mb-16">
             <div className="inline-block">
               <span className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-purple-100 to-blue-100 dark:from-purple-900/30 dark:to-blue-900/30 text-purple-600 dark:text-purple-400 rounded-full text-sm font-medium mb-4 border border-purple-200 dark:border-purple-800">
-                <Sparkles size={14} />
+                <span className="animate-bounce">🚀</span>
                 Featured Work
               </span>
             </div>
@@ -153,7 +153,7 @@ export function Projects() {
   }
 
   return (
-    <section id="projects" className="py-16 px-6 relative overflow-hidden">
+    <section id="projects" className="py-20 px-6 relative overflow-hidden">
       {/* Fixed Background Particles */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         {particles.map((particle, i) => (
@@ -174,13 +174,13 @@ export function Projects() {
       </div>
 
       <div className="max-w-6xl mx-auto relative z-10">
-        {/* Section Header */}
-        <div className={`text-center mb-12 transition-all duration-1000 ${
+        {/* Section Header - NOW CONSISTENT */}
+        <div className={`text-center mb-16 transition-all duration-1000 ${
           isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
         }`}>
           <div className="inline-block">
             <span className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-purple-100 to-blue-100 dark:from-purple-900/30 dark:to-blue-900/30 text-purple-600 dark:text-purple-400 rounded-full text-sm font-medium mb-4 border border-purple-200 dark:border-purple-800">
-              <Sparkles size={14} />
+              <span className="animate-bounce">🚀</span>
               Featured Work
             </span>
           </div>
@@ -311,7 +311,7 @@ export function Projects() {
                       <div className={`flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium ${
                         project.status === 'Live Demo' 
                           ? 'bg-green-100 text-green-700 dark:bg-green-900/20 dark:text-green-400'
-                          : project.status === 'Production' 
+                          :                         project.status === 'Production' 
                           ? 'bg-blue-100 text-blue-700 dark:bg-blue-900/20 dark:text-blue-400'
                           : project.status === 'GitHub' 
                           ? 'bg-gray-100 text-gray-700 dark:bg-gray-800 dark:text-gray-300'

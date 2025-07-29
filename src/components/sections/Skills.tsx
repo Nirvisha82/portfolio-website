@@ -1,5 +1,6 @@
 'use client'
 import { useState, useEffect } from 'react'
+import { Sparkles } from 'lucide-react'
 
 export function Skills() {
   const [hoveredSkill, setHoveredSkill] = useState<string | null>(null)
@@ -77,14 +78,20 @@ export function Skills() {
   ]
 
   return (
-    <section id="skills" className="py-12 px-6">
+    <section id="skills" className="py-20 px-6 relative">
       <div className="max-w-6xl mx-auto">
-        {/* Header */}
-        <div className="text-center mb-10">
-          <h2 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-2">
-            Technical Skills
+        {/* Section Header - NOW CONSISTENT */}
+        <div className={`text-center mb-16 transition-all duration-1000 ${
+          isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+        }`}>
+          <span className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-purple-100 to-blue-100 dark:from-purple-900/30 dark:to-blue-900/30 text-purple-600 dark:text-purple-400 rounded-full text-sm font-medium mb-4 border border-purple-200 dark:border-purple-800">
+            <span className="animate-bounce">💻</span>
+            Technical Arsenal
+          </span>
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
+            Skills & Technologies
           </h2>
-          <p className="text-gray-600 dark:text-gray-300 text-sm">
+          <p className="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
             Core technologies organized by expertise area
           </p>
         </div>

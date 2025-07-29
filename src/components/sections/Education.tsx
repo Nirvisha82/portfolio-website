@@ -37,10 +37,9 @@ export function Education() {
       status: "Completed",
       gpa: "9.62/10",
       highlights: [
-        "Magna Cum Laude Graduate",
-        "Dean's List for 6 semesters",
-        "Computer Science Society President",
-        "Published undergraduate research paper"
+        "Executive Committee Member - IEEE Student Branch, VIT",
+        "Machine Learning Trainer - GedIT Coding Club, VIT",
+        "Utkarsh Best Volunteer - Social Welfare and Development, VIT",
       ],
       relevantCourses: [
         "Data Structures", "Object Oriented Programming", "Design and Analysis of Algorithm", "Database Managment System", "Computer Architecture and Operating System","Cloud Computing",
@@ -113,12 +112,13 @@ export function Education() {
   return (
     <section id="education" className="py-20 px-6 relative">
       <div className="max-w-6xl mx-auto relative z-10">
-        {/* Section Header */}
+        {/* Section Header - NOW CONSISTENT */}
         <div className={`text-center mb-16 transition-all duration-1000 ${
           isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
         }`}>
-          <span className="inline-block px-4 py-2 bg-indigo-100 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-400 rounded-full text-sm font-medium mb-4">
-            🎓 Academic Journey
+          <span className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-purple-100 to-blue-100 dark:from-purple-900/30 dark:to-blue-900/30 text-purple-600 dark:text-purple-400 rounded-full text-sm font-medium mb-4 border border-purple-200 dark:border-purple-800">
+            <span className="animate-bounce">🎓</span>
+            Academic Journey
           </span>
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
             Education 

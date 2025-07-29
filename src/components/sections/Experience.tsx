@@ -106,19 +106,14 @@ export function Experience() {
 
   return (
     <section id="experience" className="py-20 px-6 relative overflow-hidden">
-      {/* Background Elements
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-1/3 right-1/6 w-80 h-80 bg-emerald-400/5 dark:bg-emerald-400/10 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-1/3 left-1/6 w-96 h-96 bg-blue-400/5 dark:bg-blue-400/10 rounded-full blur-3xl"></div>
-      </div> */}
-
       <div className="max-w-6xl mx-auto relative z-10">
-        {/* Section Header */}
+        {/* Section Header - NOW CONSISTENT */}
         <div className={`text-center mb-16 transition-all duration-1000 ${
           isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
         }`}>
-          <span className="inline-block px-4 py-2 bg-emerald-100 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400 rounded-full text-sm font-medium mb-4">
-            💼 Professional Journey
+          <span className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-purple-100 to-blue-100 dark:from-purple-900/30 dark:to-blue-900/30 text-purple-600 dark:text-purple-400 rounded-full text-sm font-medium mb-4 border border-purple-200 dark:border-purple-800">
+            <span className="animate-bounce">💼</span>
+            Professional Journey
           </span>
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
             Experience & Growth
