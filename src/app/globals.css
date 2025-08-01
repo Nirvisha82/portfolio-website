@@ -598,3 +598,69 @@ html.dark body {
 .animate-breathe {
   animation: breathe 6s ease-in-out infinite;
 }
+
+@media not all and (min-resolution:.001dpcm) {
+  @supports (-webkit-appearance:none) {
+    /* This targets Safari only */
+    
+    .dark body,
+    html.dark body {
+      background: #1a1332 !important; /* Fallback solid purple */
+      background: -webkit-linear-gradient(135deg, #0f0b27 0%, #1a1332 25%, #231944 50%, #1a1332 75%, #0f0b27 100%) !important;
+      background: linear-gradient(135deg, #0f0b27 0%, #1a1332 25%, #231944 50%, #1a1332 75%, #0f0b27 100%) !important;
+    }
+    
+    /* Force purple background on Safari dark mode */
+    .dark {
+      background-color: #1a1332 !important;
+    }
+    
+    /* Safari-specific body background override */
+    .dark body::before {
+      background-color: rgba(26, 19, 50, 0.3) !important;
+    }
+    
+    /* Additional Safari-specific purple enforcement */
+    html.dark {
+      background: #1a1332 !important;
+    }
+    
+    html.dark body {
+      background: -webkit-linear-gradient(135deg, #0f0b27, #1a1332, #231944, #1a1332, #0f0b27) !important;
+    }
+  }
+}
+
+/* Alternative: Use webkit-specific media query */
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  .dark body,
+  html.dark body {
+    background: #1a1332 !important;
+    background: -webkit-gradient(linear, left top, right bottom, 
+      color-stop(0%, #0f0b27), 
+      color-stop(25%, #1a1332), 
+      color-stop(50%, #231944), 
+      color-stop(75%, #1a1332), 
+      color-stop(100%, #0f0b27)) !important;
+  }
+}
+
+/* iOS Safari specific (if you're also having mobile Safari issues) */
+@supports (-webkit-touch-callout: none) {
+  .dark body {
+    background: #1a1332 !important;
+    background: -webkit-linear-gradient(135deg, #0f0b27, #1a1332, #231944) !important;
+  }
+}
+
+/* Force with CSS custom properties for Safari */
+:root {
+  --safari-dark-bg: linear-gradient(135deg, #0f0b27 0%, #1a1332 25%, #231944 50%, #1a1332 75%, #0f0b27 100%);
+}
+
+@supports (-webkit-backdrop-filter: blur(10px)) {
+  .dark body {
+    background: var(--safari-dark-bg) !important;
+    background-color: #1a1332 !important; /* Fallback */
+  }
+}
