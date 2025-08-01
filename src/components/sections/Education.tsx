@@ -145,10 +145,9 @@ export function Education() {
                 onMouseEnter={() => setActiveScroll(edu.id)}
                 onMouseLeave={() => setActiveScroll(null)}
                 onClick={() => {
-                  if (window.innerWidth < 768) { // Only use click on mobile
-                    setActiveScroll(activeScroll === edu.id ? null : edu.id)
-                  }
-                }} // Mobile tap support
+                  // Always allow click/tap to toggle on mobile, but don't interfere with hover on desktop
+                  setActiveScroll(activeScroll === edu.id ? null : edu.id);
+                }}
               >
                 {/* Scroll Container */}
                 <div className={`relative ${
