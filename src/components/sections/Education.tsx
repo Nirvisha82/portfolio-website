@@ -144,7 +144,11 @@ export function Education() {
                 }}
                 onMouseEnter={() => setActiveScroll(edu.id)}
                 onMouseLeave={() => setActiveScroll(null)}
-                onClick={() => setActiveScroll(activeScroll === edu.id ? null : edu.id)} // Mobile tap support
+                onClick={() => {
+                  if (window.innerWidth < 768) { // Only use click on mobile
+                    setActiveScroll(activeScroll === edu.id ? null : edu.id)
+                  }
+                }} // Mobile tap support
               >
                 {/* Scroll Container */}
                 <div className={`relative ${

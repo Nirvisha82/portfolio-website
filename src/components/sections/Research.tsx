@@ -101,20 +101,22 @@ export function Research() {
     const relativePosition = (index - currentPaper + publications.length) % publications.length
     const isItemVisible = visiblePapers.includes(index)
     
-    // Mobile vs Desktop differences
+    // Mobile vs Desktop differences - Enhanced stacking effect
     const isMobile = typeof window !== 'undefined' && window.innerWidth < 768
     
     return {
       transform: `
-        translateY(${relativePosition * (isMobile ? 4 : 8)}px) 
-        translateX(${relativePosition * (isMobile ? 2 : 4)}px) 
-        rotateZ(${relativePosition * (isMobile ? 1 : 2) - (isMobile ? 1.5 : 3)}deg)
-        scale(${1 - relativePosition * (isMobile ? 0.02 : 0.04)})
+        translateY(${relativePosition * (isMobile ? 8 : 8)}px) 
+        translateX(${relativePosition * (isMobile ? 4 : 4)}px) 
+        rotateZ(${relativePosition * (isMobile ? 2 : 2) - (isMobile ? 3 : 3)}deg)
+        scale(${1 - relativePosition * (isMobile ? 0.04 : 0.04)})
       `,
       zIndex: 40 - relativePosition,
       opacity: isItemVisible ? (
         relativePosition === 0 ? 1 : // Current paper full opacity
-        relativePosition === 1 ? (isMobile ? 0 : 0.3) : // Next paper (hidden on mobile)
+        relativePosition === 1 ? (isMobile ? 0.4 : 0.3) : // Next paper (visible on mobile too)
+        relativePosition === 2 ? (isMobile ? 0.2 : 0.15) : // Third paper (subtle visibility)
+        relativePosition === 3 ? (isMobile ? 0.1 : 0.1) : // Fourth paper (very subtle)
         0 // All others hidden
       ) : 0,
       transitionProperty: 'transform, opacity, z-index',
@@ -155,7 +157,7 @@ export function Research() {
         <div className={`relative max-w-full sm:max-w-3xl mx-auto mb-6 sm:mb-8 px-12 sm:px-0 transition-all duration-1000 ${
           isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
         }`} style={{ transitionDelay: '200ms' }}>
-          <div className="relative h-[480px] sm:h-[400px] perspective-1000">
+          <div className="relative h-[520px] sm:h-[400px] perspective-1000">
             
             {/* Navigation Controls - Properly positioned */}
             <div className={`absolute -left-12 top-1/2 transform -translate-y-1/2 z-40 transition-all duration-1000 ${
@@ -233,7 +235,7 @@ export function Research() {
                     </div>
 
                     {/* Description */}
-                    <div className="flex-1 mb-3 sm:mb-4">
+                    <div className="flex-1 mb-4 sm:mb-4">
                       <p className="text-gray-600 dark:text-gray-300 leading-relaxed text-xs sm:text-sm break-words">
                         {paper.description}
                       </p>
@@ -244,7 +246,7 @@ export function Research() {
                       <h4 className="font-semibold text-gray-900 dark:text-white mb-2 text-xs sm:text-sm">
                         Keywords
                       </h4>
-                      <div className="flex flex-wrap gap-1 sm:gap-1.5 pb-2 sm:pb-0">
+                      <div className="flex flex-wrap gap-1 sm:gap-1.5 mb-4 sm:mb-0">
                         {paper.tech.map((tech, idx) => (
                           <span
                             key={idx}
