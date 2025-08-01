@@ -586,3 +586,11 @@ html.dark body {
 .animate-breathe {
   animation: breathe 6s ease-in-out infinite;
 }
+
+.dark {
+  background: #0f0b1f !important;
+}
+
+.dark body {
+  background: linear-gradient(135deg, #0f0b1f 0%, #1a1625 100%) !important;
+}
