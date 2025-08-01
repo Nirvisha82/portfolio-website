@@ -1,8 +1,8 @@
 'use client'
 import { useState, useEffect } from 'react'
+import Image from 'next/image'
 
 export function About() {
-  const [imageLoaded, setImageLoaded] = useState(false)
   const [isVisible, setIsVisible] = useState(false)
 
   // Intersection Observer for scroll animations
@@ -48,7 +48,7 @@ export function About() {
             Get to know me better
           </h2>
           <p className="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-                            Building the future, one line of code at a time
+            Building the future, one line of code at a time
           </p>
         </div>
 
@@ -63,19 +63,12 @@ export function About() {
               <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-purple-100 to-blue-100 dark:from-purple-900/20 dark:to-blue-900/20 p-8 aspect-square flex items-center justify-center">
                 {/* Profile Image */}
                 <div className="w-full h-full rounded-xl overflow-hidden shadow-2xl transform group-hover:scale-105 transition-transform duration-300">
-                  <img 
+                  <Image 
                     src="/images/nirvisha.png" 
                     alt="Nirvisha Soni - Profile" 
+                    width={400}
+                    height={400}
                     className="w-full h-full object-cover object-center"
-                    onLoad={() => setImageLoaded(true)}
-                    onError={(e) => {
-                      // Fallback to gradient with initial if image fails to load
-                      e.currentTarget.style.display = 'none'
-                      const fallback = e.currentTarget.parentElement
-                      if (fallback) {
-                        fallback.innerHTML = `<div class="w-full h-full bg-gradient-to-br from-purple-400 to-blue-500 rounded-xl flex items-center justify-center text-white text-6xl font-bold">N</div>`
-                      }
-                    }}
                   />
                 </div>
                 
@@ -112,11 +105,10 @@ export function About() {
                 A Computer Science student with a passion for backend development and artificial intelligence. I enjoy creating scalable systems that solve real-world problems and make a meaningful impact through innovative technology solutions.
                 </p>
                 <p>
-                 When I'm not deep in coding projects, you'll find me exploring the latest AI research, experimenting with new technologies, or completely switching gears to indulge in my love for cooking. I enjoy exploring different cuisines and culinary experiences - from trying authentic regional dishes to experimenting with fusion flavors in my own kitchen.
+                 When I&apos;m not deep in coding projects, you&apos;ll find me exploring the latest AI research, experimenting with new technologies, or completely switching gears to indulge in my love for cooking. I enjoy exploring different cuisines and culinary experiences - from trying authentic regional dishes to experimenting with fusion flavors in my own kitchen.
                 </p>
                 <p>
-
-                  I'm always eager to connect with new people and learn from their diverse perspectives. 
+                  I&apos;m always eager to connect with new people and learn from their diverse perspectives. 
                   Currently seeking opportunities to apply my skills in <strong className="text-purple-600 dark:text-purple-400">backend development</strong> and 
                   <strong className="text-blue-600 dark:text-blue-400"> AI engineering</strong> roles where I can contribute to innovative projects.
                 </p>
@@ -127,12 +119,12 @@ export function About() {
             <div className={`pt-4 transition-all duration-1000 delay-1000 ${
               isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
             }`}>
-<a 
-  href="mailto:nsoni@ufl.edu"
-  className="inline-flex items-center justify-center bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white px-8 py-4 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-purple-500/25"
->
-  Let's work together →
-</a>
+              <a 
+                href="mailto:nsoni@ufl.edu"
+                className="inline-flex items-center justify-center bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white px-8 py-4 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-purple-500/25"
+              >
+                Let&apos;s work together →
+              </a>
             </div>
           </div>
         </div>

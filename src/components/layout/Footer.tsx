@@ -10,12 +10,6 @@ export function Footer() {
     setMounted(true)
   }, [])
 
-  const scrollToSection = (sectionId: string) => {
-    document.getElementById(sectionId)?.scrollIntoView({ 
-      behavior: 'smooth' 
-    })
-  }
-
   // Fixed particle positions to avoid hydration issues
   const particles = [
     { left: 15, top: 25, delay: 0, duration: 4 },

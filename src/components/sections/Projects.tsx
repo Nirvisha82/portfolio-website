@@ -96,7 +96,7 @@ export function Projects() {
       window.removeEventListener('mousemove', handleMouseMove)
       observer.disconnect()
     }
-  }, [])
+  }, [projects])
 
   const getCardTransform = (index: number) => {
     if (!mounted || hoveredProject !== index + 1) return 'rotateX(0deg) rotateY(0deg)'
@@ -133,7 +133,7 @@ export function Projects() {
               Projects that showcase my journey
             </h2>
             <p className="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-              From concept to code - here's how I bring ideas to life
+              From concept to code - here&apos;s how I bring ideas to life
             </p>
           </div>
           <div className="grid md:grid-cols-2 gap-8">
@@ -184,7 +184,7 @@ export function Projects() {
             Projects that showcase my journey
           </h2>
           <p className="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-            From concept to code - here's how I bring ideas to life
+            From concept to code - here&apos;s how I bring ideas to life
           </p>
         </div>
 

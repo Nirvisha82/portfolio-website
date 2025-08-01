@@ -184,7 +184,7 @@ export default function Home() {
             </h1>
             
             <p className="text-lg md:text-xl text-gray-600 dark:text-gray-300 mb-8 max-w-3xl mx-auto leading-relaxed">
-              Hi! I'm <strong className="text-purple-600 dark:text-purple-400">Nirvisha</strong>, a Computer Science student and developer specializing in 
+              Hi! I&apos;m <strong className="text-purple-600 dark:text-purple-400">Nirvisha</strong>, a Computer Science student and developer specializing in 
               <span className="text-blue-600 dark:text-blue-400"> backend systems</span> and 
               <span className="text-cyan-600 dark:text-cyan-400"> AI solutions</span>.
             </p>
@@ -199,7 +199,7 @@ export default function Home() {
                 className="group bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white px-8 py-4 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-purple-500/25"
               >
                 <span className="flex items-center gap-2">
-                  See what I've built
+                  See what I&apos;ve built
                   <span className="group-hover:translate-x-1 transition-transform">→</span>
                 </span>
               </button>
