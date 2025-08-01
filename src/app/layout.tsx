@@ -1,3 +1,4 @@
+
 import type { Metadata } from "next";
 import "./globals.css";
 import { Providers } from '@/providers'
@@ -15,7 +16,14 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        <script src="/theme-script.js" async />
+        {/* Simple inline style to prevent flash - this works everywhere */}
+        <style dangerouslySetInnerHTML={{
+          __html: `
+            * { transition: none !important; }
+            html { color-scheme: light; }
+            html.dark { color-scheme: dark; }
+          `
+        }} />
       </head>
       <body className="antialiased" suppressHydrationWarning>
         <Providers>
