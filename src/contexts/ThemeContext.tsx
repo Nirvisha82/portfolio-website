@@ -11,77 +11,115 @@ type ThemeContextType = {
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined)
 
-// Extend Window interface for TypeScript
-declare global {
-  interface Window {
-    __theme?: Theme;
-    __resolvedTheme?: 'light' | 'dark';
-  }
-}
-
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  // Start with safe defaults that match server-side rendering
   const [theme, setTheme] = useState<Theme>('system')
   const [resolvedTheme, setResolvedTheme] = useState<'light' | 'dark'>('light')
   const [mounted, setMounted] = useState(false)
 
-  // Hydrate with actual values after mounting
+  // Helper function to get stored theme
+  const getStoredTheme = (): Theme => {
+    if (typeof window === 'undefined') return 'system'
+    
+    try {
+      const stored = localStorage.getItem('theme')
+      if (stored && ['light', 'dark', 'system'].includes(stored)) {
+        return stored as Theme
+      }
+    } catch (error) {
+      console.warn('Failed to read theme from localStorage:', error)
+    }
+    return 'system'
+  }
+
+  // Helper function to resolve theme
+  const resolveTheme = (themeToResolve: Theme): 'light' | 'dark' => {
+    if (themeToResolve === 'light') return 'light'
+    if (themeToResolve === 'dark') return 'dark'
+    
+    // For system preference
+    if (typeof window !== 'undefined') {
+      try {
+        return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+      } catch (error) {
+        console.warn('Failed to check system theme preference:', error)
+      }
+    }
+    return 'light'
+  }
+
+  // Helper function to apply theme to document
+  const applyThemeToDocument = (resolvedTheme: 'light' | 'dark') => {
+    try {
+      const root = document.documentElement
+      if (resolvedTheme === 'dark') {
+        root.classList.add('dark')
+      } else {
+        root.classList.remove('dark')
+      }
+    } catch (error) {
+      console.warn('Failed to apply theme to document:', error)
+    }
+  }
+
+  // Initialize theme on mount
   useEffect(() => {
     setMounted(true)
     
-    if (typeof window !== 'undefined') {
-      const actualTheme = window.__theme || 'system'
-      const actualResolvedTheme = window.__resolvedTheme || 'light'
-      
-      setTheme(actualTheme)
-      setResolvedTheme(actualResolvedTheme)
-    }
+    // Get initial theme from localStorage or system preference
+    const initialTheme = getStoredTheme()
+    const initialResolvedTheme = resolveTheme(initialTheme)
+    
+    setTheme(initialTheme)
+    setResolvedTheme(initialResolvedTheme)
+    
+    // Apply theme immediately to prevent flash
+    applyThemeToDocument(initialResolvedTheme)
   }, [])
 
   // Handle theme changes
   useEffect(() => {
     if (!mounted) return
 
-    const updateTheme = () => {
-      let newResolvedTheme: 'light' | 'dark'
-      
-      if (theme === 'light') {
-        newResolvedTheme = 'light'
-      } else if (theme === 'dark') {
-        newResolvedTheme = 'dark'
-      } else {
-        // system
-        newResolvedTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
-      }
-      
-      setResolvedTheme(newResolvedTheme)
-      
-      // Apply to document
-      const root = document.documentElement
-      if (newResolvedTheme === 'dark') {
-        root.classList.add('dark')
-      } else {
-        root.classList.remove('dark')
-      }
-      
-      // Store in localStorage and window
+    const newResolvedTheme = resolveTheme(theme)
+    setResolvedTheme(newResolvedTheme)
+    applyThemeToDocument(newResolvedTheme)
+    
+    // Store in localStorage
+    try {
       localStorage.setItem('theme', theme)
-      window.__theme = theme
-      window.__resolvedTheme = newResolvedTheme
+    } catch (error) {
+      console.warn('Failed to save theme to localStorage:', error)
     }
+  }, [theme, mounted])
 
-    updateTheme()
+  // Listen for system preference changes
+  useEffect(() => {
+    if (!mounted || typeof window === 'undefined') return
 
-    // Listen for system preference changes
     const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
+    
     const handleSystemChange = () => {
       if (theme === 'system') {
-        updateTheme()
+        const newResolvedTheme = resolveTheme('system')
+        setResolvedTheme(newResolvedTheme)
+        applyThemeToDocument(newResolvedTheme)
       }
     }
     
-    mediaQuery.addEventListener('change', handleSystemChange)
-    return () => mediaQuery.removeEventListener('change', handleSystemChange)
+    try {
+      mediaQuery.addEventListener('change', handleSystemChange)
+      return () => mediaQuery.removeEventListener('change', handleSystemChange)
+    } catch (error) {
+      // Fallback for older browsers
+      console.warn('MediaQuery addEventListener not supported, using addListener fallback')
+      const addListener = mediaQuery.addListener || mediaQuery.addEventListener
+      const removeListener = mediaQuery.removeListener || mediaQuery.removeEventListener
+      
+      if (addListener && removeListener) {
+        addListener.call(mediaQuery, handleSystemChange)
+        return () => removeListener.call(mediaQuery, handleSystemChange)
+      }
+    }
   }, [theme, mounted])
 
   return (

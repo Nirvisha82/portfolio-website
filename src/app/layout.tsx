@@ -19,7 +19,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        <ThemeScript />
+        <script src="/theme-script.js" />
       </head>
       <body>
         <Providers>
