@@ -25,8 +25,8 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
       if (stored && ['light', 'dark', 'system'].includes(stored)) {
         return stored as Theme
       }
-    } catch (error) {
-      console.warn('Failed to read theme from localStorage:', error)
+    } catch {
+      // Silent fail for localStorage access issues
     }
     return 'system'
   }
@@ -40,8 +40,8 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     if (typeof window !== 'undefined') {
       try {
         return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
-      } catch (error) {
-        console.warn('Failed to check system theme preference:', error)
+      } catch {
+        // Silent fail for matchMedia issues
       }
     }
     return 'light'
@@ -56,8 +56,8 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
       } else {
         root.classList.remove('dark')
       }
-    } catch (error) {
-      console.warn('Failed to apply theme to document:', error)
+    } catch {
+      // Silent fail for DOM manipulation issues
     }
   }
 
@@ -87,8 +87,8 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     // Store in localStorage
     try {
       localStorage.setItem('theme', theme)
-    } catch (error) {
-      console.warn('Failed to save theme to localStorage:', error)
+    } catch {
+      // Silent fail for localStorage access issues
     }
   }, [theme, mounted])
 
@@ -109,9 +109,8 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     try {
       mediaQuery.addEventListener('change', handleSystemChange)
       return () => mediaQuery.removeEventListener('change', handleSystemChange)
-    } catch (error) {
+    } catch {
       // Fallback for older browsers
-      console.warn('MediaQuery addEventListener not supported, using addListener fallback')
       const addListener = mediaQuery.addListener || mediaQuery.addEventListener
       const removeListener = mediaQuery.removeListener || mediaQuery.removeEventListener
       

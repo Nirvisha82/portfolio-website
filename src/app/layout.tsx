@@ -1,31 +1,27 @@
-import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
-import './globals.css'
+import type { Metadata } from "next";
+import "./globals.css";
 import { Providers } from '@/providers'
-import { ThemeScript } from '@/components/theme-script' // New script component
-
-const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'Nirvisha Portfolio',
-  description: 'Portfolio showcasing backend development and AI projects',
-}
+  title: "Nirvisha Soni - Portfolio",
+  description: "Computer Science student passionate about backend development and AI",
+};
 
 export default function RootLayout({
   children,
-}: {
-  children: React.ReactNode
-}) {
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        <script src="/theme-script.js" />
+        <script src="/theme-script.js" async />
       </head>
-      <body>
+      <body className="antialiased" suppressHydrationWarning>
         <Providers>
           {children}
         </Providers>
       </body>
     </html>
-  )
+  );
 }
