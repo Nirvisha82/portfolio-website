@@ -1,6 +1,6 @@
 'use client'
 import { useState, useEffect } from 'react'
-import { Calendar, MapPin, Building, Code, Database, Brain, Users } from 'lucide-react'
+import { Calendar, MapPin, Building } from 'lucide-react'
 
 export function Experience() {
   const [hoveredItem, setHoveredItem] = useState<number | null>(null)
@@ -45,7 +45,7 @@ export function Experience() {
         "Conducted performance evaluation using F1-score, ROC-AUC, MCC, and robustness tests"
       ],
       skills: ["Python", "ESM3", "CNNs", "MLPs", "Bioinformatics"],
-      icon: Brain,
+      logo: "/images/uf-logo-2.png", // University of Florida logo
       color: "from-purple-500 to-indigo-600"
     },
     {
@@ -63,7 +63,7 @@ export function Experience() {
         "Improved evaluation consistency & turnaround speed significantly"
       ],
       skills: ["Python", "JavaScript", "Teaching", "Automation"],
-      icon: Users,
+      logo: "/images/uf-logo-2.png", // University of Florida logo
       color: "from-blue-500 to-cyan-600"
     },
     {
@@ -81,7 +81,7 @@ export function Experience() {
         "Reduced manual intervention by 60% and accelerated settlement workflows"
       ],
       skills: ["SQL", "AWS Lambda", "Data Processing", "Financial Systems"],
-      icon: Database,
+      logo: "/images/barclays-logo.png", // Add Barclays logo
       color: "from-green-500 to-emerald-600"
     },
     {
@@ -99,7 +99,7 @@ export function Experience() {
         "Achieved Pearson correlation of 0.7 for news sentiment vs stock price analysis"
       ],
       skills: ["Transformers", "T5", "Pegasus", "LDA", "BERTopic", "Financial Analysis"],
-      icon: Code,
+      logo: "/images/algoanalytics-logo.png", // Add AlgoAnalytics logo
       color: "from-orange-500 to-red-600"
     }
   ]
@@ -107,7 +107,7 @@ export function Experience() {
   return (
     <section id="experience" className="py-20 px-6 relative overflow-hidden">
       <div className="max-w-6xl mx-auto relative z-10">
-        {/* Section Header - NOW CONSISTENT */}
+        {/* Section Header */}
         <div className={`text-center mb-16 transition-all duration-1000 ${
           isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
         }`}>
@@ -133,7 +133,6 @@ export function Experience() {
           {/* Experience Items */}
           <div className="space-y-12">
             {experiences.map((exp, index) => {
-              const IconComponent = exp.icon
               const isLeft = index % 2 === 0
               const itemVisible = visibleItems.includes(exp.id)
               
@@ -153,21 +152,39 @@ export function Experience() {
                   onMouseEnter={() => setHoveredItem(exp.id)}
                   onMouseLeave={() => setHoveredItem(null)}
                 >
-                  {/* Timeline Node */}
+                  {/* Timeline Node with Company Logo */}
                   <div className="absolute left-8 md:left-1/2 transform -translate-x-1/2 z-10">
-                    <div className={`w-16 h-16 rounded-full bg-gradient-to-br ${exp.color} shadow-lg border-4 border-white dark:border-gray-900 flex items-center justify-center transition-all duration-500 ${
+                    <div className={`w-16 h-16 rounded-full bg-white dark:bg-gray-900 shadow-lg border-4 border-white dark:border-gray-900 flex items-center justify-center transition-all duration-500 overflow-hidden ${
                       hoveredItem === exp.id ? 'scale-125 rotate-12' : itemVisible ? 'scale-100' : 'scale-75'
                     }`}>
-                      <IconComponent className="w-8 h-8 text-white" />
+                      {/* Company Logo */}
+                      <img 
+                        src={exp.logo} 
+                        alt={`${exp.company} logo`}
+                        className="w-10 h-10 object-contain transition-transform duration-300 group-hover:scale-110"
+                        onError={(e) => {
+                          // Fallback to a colored circle with company initial if image fails
+                          e.currentTarget.style.display = 'none'
+                          const fallback = e.currentTarget.parentElement
+                          if (fallback) {
+                            fallback.innerHTML = `<div class="w-10 h-10 bg-gradient-to-br ${exp.color} rounded-lg flex items-center justify-center text-white font-bold text-lg">${exp.company.charAt(0)}</div>`
+                          }
+                        }}
+                      />
+                      
+                      {/* Subtle gradient overlay for better contrast */}
+                      <div className={`absolute inset-0 rounded-full bg-gradient-to-br ${exp.color} opacity-10 transition-opacity duration-300 ${
+                        hoveredItem === exp.id ? 'opacity-20' : ''
+                      }`}></div>
                     </div>
                     
-                    {/* Pulse Ring */}
+                    {/* Pulse Ring for Current Position */}
                     {exp.current && itemVisible && (
                       <div className="absolute inset-0 rounded-full border-2 border-purple-400 animate-ping"></div>
                     )}
                   </div>
 
-                  {/* Content Card - FIXED: Consistent dark background */}
+                  {/* Content Card */}
                   <div className={`w-full md:w-5/12 ml-20 md:ml-0 ${
                     isLeft ? 'md:mr-auto md:pr-8' : 'md:ml-auto md:pl-8'
                   }`}>
