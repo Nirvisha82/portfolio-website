@@ -6,7 +6,6 @@ export const metadata: Metadata = {
   title: "Nirvisha Soni - Portfolio",
   description: "Computer Science student passionate about backend development and AI",
 };
-// Update your layout.tsx - add this script to the existing head section
 
 export default function RootLayout({
   children,
@@ -16,7 +15,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        {/* Your existing flash fix script */}
+        {/* FLASH FIX - Apply dark mode immediately before any rendering */}
         <script dangerouslySetInnerHTML={{
           __html: `
             (function() {
@@ -40,47 +39,27 @@ export default function RootLayout({
           `
         }} />
 
-        {/* NEW: Safari-only purple tint fix that doesn't interfere with CSS */}
-        <script dangerouslySetInnerHTML={{
-          __html: `
-            const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
-            
-            if (isSafari) {
-              function applySafariPurpleFix() {
-                const isDark = document.documentElement.classList.contains('dark');
-                if (isDark) {
-                  // Only set the html background, don't touch body or pseudo-elements
-                  document.documentElement.style.setProperty('background', '#1a1332', 'important');
-                  document.documentElement.style.setProperty('background-color', '#1a1332', 'important');
-                }
-              }
-              
-              // Apply on theme changes
-              const observer = new MutationObserver(function(mutations) {
-                mutations.forEach(function(mutation) {
-                  if (mutation.attributeName === 'class') {
-                    applySafariPurpleFix();
-                  }
-                });
-              });
-              
-              observer.observe(document.documentElement, {
-                attributes: true,
-                attributeFilter: ['class']
-              });
-              
-              // Apply immediately if already dark
-              document.addEventListener('DOMContentLoaded', applySafariPurpleFix);
-            }
-          `
-        }} />
-
-        {/* Your existing style tag */}
+        {/* FIXED: Only disable transitions briefly, then re-enable */}
         <style dangerouslySetInnerHTML={{
           __html: `
-            * { transition: none !important; }
+            html.loading * { 
+              transition: none !important; 
+              animation-duration: 0s !important;
+            }
             html { color-scheme: light; }
             html.dark { color-scheme: dark; }
+          `
+        }} />
+        
+        {/* Re-enable smooth animations after initial load */}
+        <script dangerouslySetInnerHTML={{
+          __html: `
+            document.documentElement.classList.add('loading');
+            window.addEventListener('DOMContentLoaded', function() {
+              setTimeout(function() {
+                document.documentElement.classList.remove('loading');
+              }, 100);
+            });
           `
         }} />
       </head>
