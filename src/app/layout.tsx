@@ -6,6 +6,7 @@ export const metadata: Metadata = {
   title: "Nirvisha Soni - Portfolio",
   description: "Computer Science student passionate about backend development and AI",
 };
+// Update your layout.tsx - add this script to the existing head section
 
 export default function RootLayout({
   children,
@@ -15,7 +16,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        {/* FLASH FIX - Apply dark mode immediately before any rendering */}
+        {/* Your existing flash fix script */}
         <script dangerouslySetInnerHTML={{
           __html: `
             (function() {
@@ -39,7 +40,42 @@ export default function RootLayout({
           `
         }} />
 
-        {/* Simple inline style to prevent flash - this works everywhere */}
+        {/* NEW: Safari-only purple tint fix that doesn't interfere with CSS */}
+        <script dangerouslySetInnerHTML={{
+          __html: `
+            const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+            
+            if (isSafari) {
+              function applySafariPurpleFix() {
+                const isDark = document.documentElement.classList.contains('dark');
+                if (isDark) {
+                  // Only set the html background, don't touch body or pseudo-elements
+                  document.documentElement.style.setProperty('background', '#1a1332', 'important');
+                  document.documentElement.style.setProperty('background-color', '#1a1332', 'important');
+                }
+              }
+              
+              // Apply on theme changes
+              const observer = new MutationObserver(function(mutations) {
+                mutations.forEach(function(mutation) {
+                  if (mutation.attributeName === 'class') {
+                    applySafariPurpleFix();
+                  }
+                });
+              });
+              
+              observer.observe(document.documentElement, {
+                attributes: true,
+                attributeFilter: ['class']
+              });
+              
+              // Apply immediately if already dark
+              document.addEventListener('DOMContentLoaded', applySafariPurpleFix);
+            }
+          `
+        }} />
+
+        {/* Your existing style tag */}
         <style dangerouslySetInnerHTML={{
           __html: `
             * { transition: none !important; }
