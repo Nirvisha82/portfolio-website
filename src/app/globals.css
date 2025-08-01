@@ -57,17 +57,29 @@ body::after {
   animation: lightBreathe 8s ease-in-out infinite;
 }
 
-/* Dark Mode Body */
-.dark body {
-  background: linear-gradient(135deg, #0f0b27 0%, #1a1332 25%, #231944  50%, #1a1332 75%, #0f0b27 100%);
+/* CORRECTED Dark Mode Body - Keep your original beautiful design */
+.dark body,
+html.dark body {
+  background: linear-gradient(135deg, #0f0b27 0%, #1a1332 25%, #231944 50%, #1a1332 75%, #0f0b27 100%) !important;
   color: var(--foreground-dark);
   position: relative;
   overflow-x: hidden;
 }
 
-html.dark body {
-  background: linear-gradient(135deg, #0f0b27 0%, #1a1332 25%, #231944  50%, #1a1332 75%, #0f0b27 100%);
-  color: var(--foreground-dark);
+/* Safari-specific dark mode fixes - only for navigation elements */
+@supports (-webkit-backdrop-filter: blur(10px)) {
+  .dark nav[class*="backdrop-blur"] {
+    background-color: rgba(26, 19, 50, 0.85) !important;
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+  }
+  
+  .dark .backdrop-blur-md,
+  .dark .backdrop-blur-sm {
+    background-color: rgba(26, 19, 50, 0.8) !important;
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+  }
 }
 
 /* Dark Mode Grid Pattern Background Animation */
@@ -585,12 +597,4 @@ html.dark body {
 
 .animate-breathe {
   animation: breathe 6s ease-in-out infinite;
-}
-
-.dark {
-  background: #0f0b1f !important;
-}
-
-.dark body {
-  background: linear-gradient(135deg, #0f0b1f 0%, #1a1625 100%) !important;
 }
