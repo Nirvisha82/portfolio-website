@@ -599,3 +599,25 @@ html.dark body {
   animation: breathe 6s ease-in-out infinite;
 }
 
+:root {
+  --animation-duration-fast: 300ms;
+  --animation-duration-normal: 500ms;
+  --animation-duration-slow: 700ms;
+  --animation-ease: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Performance boost */
+.gpu-accelerated {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

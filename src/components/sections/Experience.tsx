@@ -2,33 +2,46 @@
 import { useState, useEffect } from 'react'
 import { Calendar, MapPin, Building } from 'lucide-react'
 
-export function Experience() {
-  const [hoveredItem, setHoveredItem] = useState<number | null>(null)
+// Import the unified hook (you'll need to create this file)
+// import { useStaggeredAnimation } from '@/hooks/useScrollAnimation'
+
+// Temporary inline hook for this example - replace with import above
+function useStaggeredAnimation(itemCount: number) {
   const [isVisible, setIsVisible] = useState(false)
   const [visibleItems, setVisibleItems] = useState<number[]>([])
 
-  // Main section visibility
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
           setIsVisible(true)
-          // Stagger the experience items
-          setTimeout(() => setVisibleItems([1]), 200)
-          setTimeout(() => setVisibleItems([1, 2]), 400)
-          setTimeout(() => setVisibleItems([1, 2, 3]), 600)
-          setTimeout(() => setVisibleItems([1, 2, 3, 4]), 800)
+          // Start staggered animation immediately when visible
+          for (let i = 0; i < itemCount; i++) {
+            setTimeout(() => {
+              setVisibleItems(prev => [...prev, i])
+            }, i * 150) // Faster stagger
+          }
         }
+        // Remove the else clause to prevent disappearing
       },
-      { threshold: 0.2 }
+      { 
+        threshold: 0.15, // Lower threshold for earlier trigger
+        rootMargin: '0px 0px -50px 0px' // Trigger before fully visible
+      }
     )
 
     const section = document.getElementById('experience')
     if (section) observer.observe(section)
 
     return () => observer.disconnect()
-  }, [])
+  }, [itemCount])
 
+  return { isVisible, visibleItems }
+}
+
+export function Experience() {
+  const [hoveredItem, setHoveredItem] = useState<number | null>(null)
+  
   const experiences = [
     {
       id: 1,
@@ -45,7 +58,7 @@ export function Experience() {
         "Conducted performance evaluation using F1-score, ROC-AUC, MCC, and robustness tests"
       ],
       skills: ["Python", "ESM3", "CNNs", "MLPs", "Bioinformatics"],
-      logo: "/images/uf-logo-2.png", // University of Florida logo
+      logo: "/images/uf-logo-2.png",
       color: "from-purple-500 to-indigo-600"
     },
     {
@@ -63,7 +76,7 @@ export function Experience() {
         "Improved evaluation consistency & turnaround speed significantly"
       ],
       skills: ["Python", "JavaScript", "Teaching", "Automation"],
-      logo: "/images/uf-logo-2.png", // University of Florida logo
+      logo: "/images/uf-logo-2.png",
       color: "from-blue-500 to-cyan-600"
     },
     {
@@ -81,7 +94,7 @@ export function Experience() {
         "Reduced manual intervention by 60% and accelerated settlement workflows"
       ],
       skills: ["SQL", "AWS Lambda", "Data Processing", "Financial Systems"],
-      logo: "/images/barclays-logo.png", // Add Barclays logo
+      logo: "/images/barclays-logo.png",
       color: "from-green-500 to-emerald-600"
     },
     {
@@ -99,16 +112,18 @@ export function Experience() {
         "Achieved Pearson correlation of 0.7 for news sentiment vs stock price analysis"
       ],
       skills: ["Transformers", "T5", "Pegasus", "LDA", "BERTopic", "Financial Analysis"],
-      logo: "/images/algoanalytics-logo.png", // Add AlgoAnalytics logo
+      logo: "/images/algoanalytics-logo.png",
       color: "from-orange-500 to-red-600"
     }
   ]
 
+  const { isVisible, visibleItems } = useStaggeredAnimation(experiences.length)
+
   return (
-    <section id="experience" className="py-20 px-6 relative overflow-hidden">
+    <section id="experience" data-scroll-section className="py-20 px-6 relative overflow-hidden">
       <div className="max-w-6xl mx-auto relative z-10">
         {/* Section Header */}
-        <div className={`text-center mb-16 transition-all duration-1000 ${
+        <div className={`text-center mb-16 transition-all duration-700 ease-out ${
           isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
         }`}>
           <span className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-purple-100 to-blue-100 dark:from-purple-900/30 dark:to-blue-900/30 text-purple-600 dark:text-purple-400 rounded-full text-sm font-medium mb-4 border border-purple-200 dark:border-purple-800">
@@ -126,28 +141,28 @@ export function Experience() {
         {/* Timeline */}
         <div className="relative">
           {/* Timeline Line */}
-          <div className={`absolute left-8 md:left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-purple-400 via-blue-400 via-green-400 to-orange-400 transform md:-translate-x-1/2 transition-all duration-1000 delay-300 ${
+          <div className={`absolute left-8 md:left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-purple-400 via-blue-400 via-green-400 to-orange-400 transform md:-translate-x-1/2 transition-all duration-1000 delay-300 origin-top ${
             isVisible ? 'opacity-100 scale-y-100' : 'opacity-0 scale-y-0'
-          } origin-top`}></div>
+          }`}></div>
 
           {/* Experience Items */}
           <div className="space-y-12">
             {experiences.map((exp, index) => {
               const isLeft = index % 2 === 0
-              const itemVisible = visibleItems.includes(exp.id)
+              const itemVisible = visibleItems.includes(index)
               
               return (
                 <div
                   key={exp.id}
                   className={`relative flex items-center ${
                     isLeft ? 'md:flex-row' : 'md:flex-row-reverse'
-                  } flex-row transition-all duration-1000 ${
+                  } flex-row transition-all duration-700 ease-out ${
                     itemVisible 
                       ? 'opacity-100 translate-y-0' 
                       : 'opacity-0 translate-y-12'
                   }`}
                   style={{ 
-                    transitionDelay: itemVisible ? `${index * 200}ms` : '0ms'
+                    transitionDelay: `${index * 150}ms`
                   }}
                   onMouseEnter={() => setHoveredItem(exp.id)}
                   onMouseLeave={() => setHoveredItem(null)}
@@ -157,13 +172,11 @@ export function Experience() {
                     <div className={`w-16 h-16 rounded-full bg-white dark:bg-gray-900 shadow-lg border-4 border-white dark:border-gray-900 flex items-center justify-center transition-all duration-500 overflow-hidden ${
                       hoveredItem === exp.id ? 'scale-125 rotate-12' : itemVisible ? 'scale-100' : 'scale-75'
                     }`}>
-                      {/* Company Logo */}
                       <img 
                         src={exp.logo} 
                         alt={`${exp.company} logo`}
                         className="w-10 h-10 object-contain transition-transform duration-300 group-hover:scale-110"
                         onError={(e) => {
-                          // Fallback to a colored circle with company initial if image fails
                           e.currentTarget.style.display = 'none'
                           const fallback = e.currentTarget.parentElement
                           if (fallback) {
@@ -172,7 +185,6 @@ export function Experience() {
                         }}
                       />
                       
-                      {/* Subtle gradient overlay for better contrast */}
                       <div className={`absolute inset-0 rounded-full bg-gradient-to-br ${exp.color} opacity-10 transition-opacity duration-300 ${
                         hoveredItem === exp.id ? 'opacity-20' : ''
                       }`}></div>
@@ -242,7 +254,7 @@ export function Experience() {
                               itemVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-4'
                             }`}
                             style={{ 
-                              transitionDelay: itemVisible ? `${(index * 200) + (idx * 100) + 300}ms` : '0ms'
+                              transitionDelay: `${(index * 150) + (idx * 100) + 300}ms`
                             }}
                           >
                             <span className="w-1.5 h-1.5 rounded-full bg-blue-400 mt-2 animate-pulse"></span>
@@ -260,7 +272,7 @@ export function Experience() {
                               itemVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-75'
                             }`}
                             style={{ 
-                              transitionDelay: itemVisible ? `${(index * 200) + (idx * 50) + 500}ms` : '0ms'
+                              transitionDelay: `${(index * 150) + (idx * 50) + 500}ms`
                             }}
                           >
                             {skill}

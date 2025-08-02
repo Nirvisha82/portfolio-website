@@ -2,11 +2,40 @@
 import { useState, useEffect } from 'react'
 import { Calendar, MapPin, Users, BookOpen, Star, ChevronDown } from 'lucide-react'
 
-export function Education() {
-  const [activeScroll, setActiveScroll] = useState<number | null>(null)
+// Unified scroll animation hook (inline for this example)
+function useScrollAnimation() {
   const [isVisible, setIsVisible] = useState(false)
   const [visibleItems, setVisibleItems] = useState<number[]>([])
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true)
+          // Stagger education items
+          setTimeout(() => setVisibleItems([0]), 200)
+          setTimeout(() => setVisibleItems([0, 1]), 350)
+        }
+      },
+      { 
+        threshold: 0.15,
+        rootMargin: '0px 0px -50px 0px'
+      }
+    )
+
+    const section = document.getElementById('education')
+    if (section) observer.observe(section)
+
+    return () => observer.disconnect()
+  }, [])
+
+  return { isVisible, visibleItems }
+}
+
+export function Education() {
+  const [activeScroll, setActiveScroll] = useState<number | null>(null)
   const [isMobile, setIsMobile] = useState(false)
+  const { isVisible, visibleItems } = useScrollAnimation()
 
   const education = [
     {
@@ -50,7 +79,7 @@ export function Education() {
     }
   ]
 
-  // Detect if device supports hover (desktop) or not (mobile/touch)
+  // Detect mobile/touch devices
   useEffect(() => {
     const checkIsMobile = () => {
       const hasTouchScreen = 'ontouchstart' in window || navigator.maxTouchPoints > 0
@@ -62,39 +91,6 @@ export function Education() {
     window.addEventListener('resize', checkIsMobile)
     return () => window.removeEventListener('resize', checkIsMobile)
   }, [])
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true)
-          // Animate education items one by one
-          const timer = setTimeout(() => {
-            education.forEach((_, index) => {
-              const itemTimer = setTimeout(() => {
-                setVisibleItems(prev => [...prev, index])
-              }, index * 300)
-              return () => clearTimeout(itemTimer)
-            })
-          }, 300)
-          return () => clearTimeout(timer)
-        }
-      },
-      { threshold: 0.2 }
-    )
-
-    const section = document.getElementById('education')
-    if (section) {
-      observer.observe(section)
-    }
-
-    return () => {
-      if (section) {
-        observer.unobserve(section)
-      }
-      observer.disconnect()
-    }
-  }, [education.length])
 
   const handleCardInteraction = (eduId: number) => {
     setActiveScroll(activeScroll === eduId ? null : eduId)
@@ -138,10 +134,10 @@ export function Education() {
   }
 
   return (
-    <section id="education" className="py-12 sm:py-16 lg:py-20 px-4 sm:px-6 relative">
+    <section id="education" data-scroll-section className="py-12 sm:py-16 lg:py-20 px-4 sm:px-6 relative">
       <div className="max-w-6xl mx-auto relative z-10">
         {/* Section Header */}
-        <div className={`text-center mb-8 sm:mb-12 lg:mb-16 transition-all duration-1000 ${
+        <div className={`text-center mb-8 sm:mb-12 lg:mb-16 transition-all duration-700 ease-out ${
           isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
         }`}>
           <span className="inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2 bg-gradient-to-r from-purple-100 to-blue-100 dark:from-purple-900/30 dark:to-blue-900/30 text-purple-600 dark:text-purple-400 rounded-full text-sm font-medium mb-3 sm:mb-4 border border-purple-200 dark:border-purple-800">
@@ -164,13 +160,13 @@ export function Education() {
             return (
               <div
                 key={edu.id}
-                className={`group relative transition-all duration-1000 ${
+                className={`group relative transition-all duration-700 ease-out ${
                   isItemVisible 
                     ? 'opacity-100 translate-y-0 translate-x-0' 
                     : `opacity-0 translate-y-8 ${index % 2 === 0 ? '-translate-x-8' : 'translate-x-8'}`
                 }`}
                 style={{ 
-                  transitionDelay: isItemVisible ? '0ms' : `${index * 300}ms` 
+                  transitionDelay: `${index * 150}ms`
                 }}
                 onMouseEnter={() => handleMouseEnter(edu.id)}
                 onMouseLeave={handleMouseLeave}
@@ -198,7 +194,7 @@ export function Education() {
                           isItemVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-0'
                         }`}
                         style={{ 
-                          transitionDelay: isItemVisible ? `${index * 300 + 200}ms` : '0ms' 
+                          transitionDelay: `${index * 150 + 200}ms`
                         }}>
                           {getUniversityLogo(edu.logo)}
                         </div>
@@ -207,7 +203,7 @@ export function Education() {
                           isItemVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-4'
                         }`}
                         style={{ 
-                          transitionDelay: isItemVisible ? `${index * 300 + 400}ms` : '0ms' 
+                          transitionDelay: `${index * 150 + 300}ms`
                         }}>
                           {/* Status Badge */}
                           <div className="flex flex-col sm:flex-row sm:items-center gap-2 mb-2">
@@ -263,7 +259,7 @@ export function Education() {
                         isItemVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-4'
                       }`}
                       style={{ 
-                        transitionDelay: isItemVisible ? `${index * 300 + 600}ms` : '0ms' 
+                        transitionDelay: `${index * 150 + 400}ms`
                       }}>
                         <ChevronDown size={20} className={
                           edu.color === 'purple' ? 'text-purple-500' : 'text-blue-500'
@@ -366,11 +362,11 @@ export function Education() {
                     isItemVisible ? 'opacity-100' : 'opacity-0'
                   }`}
                   style={{ 
-                    transitionDelay: isItemVisible ? `${index * 300 + 800}ms` : '0ms' 
+                    transitionDelay: `${index * 150 + 500}ms`
                   }}></div>
                   
                   {/* Scroll-like rolled edges */}
-                  <div className={`absolute top-0 left-0 w-4 sm:w-6 h-full rounded-l-xl sm:rounded-l-2xl opacity-20 transition-all duration-1000 ${
+                  <div className={`absolute top-0 left-0 w-4 sm:w-6 h-full rounded-l-xl sm:rounded-l-2xl opacity-20 transition-all duration-700 ${
                     edu.color === 'purple'
                       ? 'bg-gradient-to-b from-purple-300 to-purple-400 dark:from-purple-700 dark:to-purple-800'
                       : 'bg-gradient-to-b from-blue-300 to-blue-400 dark:from-blue-700 dark:to-blue-800'
@@ -378,7 +374,7 @@ export function Education() {
                     isItemVisible ? 'opacity-20' : 'opacity-0'
                   }`}
                   style={{ 
-                    transitionDelay: isItemVisible ? `${index * 300 + 100}ms` : '0ms' 
+                    transitionDelay: `${index * 150 + 100}ms`
                   }}></div>
                 </div>
               </div>

@@ -2,12 +2,43 @@
 import { useState, useRef, useEffect } from 'react'
 import { Github, ArrowRight } from 'lucide-react'
 
+// Unified scroll animation hook
+function useScrollAnimation() {
+  const [isVisible, setIsVisible] = useState(false)
+  const [visibleProjects, setVisibleProjects] = useState<number[]>([])
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true)
+          // Stagger project animations
+          setTimeout(() => setVisibleProjects([0]), 200)
+          setTimeout(() => setVisibleProjects([0, 1]), 350)
+          setTimeout(() => setVisibleProjects([0, 1, 2]), 500)
+          setTimeout(() => setVisibleProjects([0, 1, 2, 3]), 650)
+        }
+      },
+      { 
+        threshold: 0.15,
+        rootMargin: '0px 0px -50px 0px'
+      }
+    )
+
+    const section = document.getElementById('projects')
+    if (section) observer.observe(section)
+
+    return () => observer.disconnect()
+  }, [])
+
+  return { isVisible, visibleProjects }
+}
+
 export function Projects() {
   const [hoveredProject, setHoveredProject] = useState<number | null>(null)
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
   const [mounted, setMounted] = useState(false)
-  const [isVisible, setIsVisible] = useState(false)
-  const [visibleProjects, setVisibleProjects] = useState<number[]>([])
+  const { isVisible, visibleProjects } = useScrollAnimation()
   const cardRefs = useRef<(HTMLDivElement | null)[]>([])
 
   const projects = [
@@ -70,33 +101,11 @@ export function Projects() {
       setMousePosition({ x: e.clientX, y: e.clientY })
     }
     window.addEventListener('mousemove', handleMouseMove)
-
-    // Scroll observer for animations
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true)
-          // Animate projects one by one
-          setTimeout(() => {
-            projects.forEach((_, index) => {
-              setTimeout(() => {
-                setVisibleProjects(prev => [...prev, index])
-              }, index * 200)
-            })
-          }, 300)
-        }
-      },
-      { threshold: 0.2 }
-    )
-
-    const section = document.getElementById('projects')
-    if (section) observer.observe(section)
     
     return () => {
       window.removeEventListener('mousemove', handleMouseMove)
-      observer.disconnect()
     }
-  }, [projects])
+  }, [])
 
   const getCardTransform = (index: number) => {
     if (!mounted || hoveredProject !== index + 1) return 'rotateX(0deg) rotateY(0deg)'
@@ -120,7 +129,7 @@ export function Projects() {
 
   if (!mounted) {
     return (
-      <section id="projects" className="py-20 px-6 relative overflow-hidden">
+      <section id="projects" data-scroll-section className="py-20 px-6 relative overflow-hidden">
         <div className="max-w-6xl mx-auto relative z-10">
           <div className="text-center mb-16">
             <div className="inline-block">
@@ -149,13 +158,13 @@ export function Projects() {
   }
 
   return (
-    <section id="projects" className="py-20 px-6 relative overflow-hidden">
+    <section id="projects" data-scroll-section className="py-20 px-6 relative overflow-hidden">
       {/* Fixed Background Particles */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         {particles.map((particle, i) => (
           <div
             key={i}
-            className={`absolute w-1 h-1 bg-purple-400 opacity-20 dark:opacity-40 rounded-full animate-float transition-all duration-1000 ${
+            className={`absolute w-1 h-1 bg-purple-400 opacity-20 dark:opacity-40 rounded-full animate-float transition-all duration-700 ease-out ${
               isVisible ? 'opacity-20 dark:opacity-40' : 'opacity-0'
             }`}
             style={{
@@ -163,7 +172,7 @@ export function Projects() {
               top: `${particle.top}%`,
               animationDelay: `${particle.delay}s`,
               animationDuration: '6s',
-              transitionDelay: isVisible ? `${particle.delay * 200}ms` : '0ms'
+              transitionDelay: `${particle.delay * 200}ms`
             }}
           />
         ))}
@@ -171,7 +180,7 @@ export function Projects() {
 
       <div className="max-w-6xl mx-auto relative z-10">
         {/* Section Header */}
-        <div className={`text-center mb-16 transition-all duration-1000 ${
+        <div className={`text-center mb-16 transition-all duration-700 ease-out ${
           isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
         }`}>
           <div className="inline-block">
@@ -196,12 +205,13 @@ export function Projects() {
             return (
               <div
                 key={project.id}
-                className={`group relative card-perspective transition-all duration-1000 ${
+                // ref={(el) => (cardRefs.current[index] = el)}
+                className={`group relative card-perspective transition-all duration-700 ease-out ${
                   isProjectVisible 
                     ? 'opacity-100 translate-y-0 translate-x-0' 
                     : `opacity-0 translate-y-8 ${index % 2 === 0 ? '-translate-x-8' : 'translate-x-8'}`
                 }`}
-                style={{ transitionDelay: isProjectVisible ? '0ms' : `${index * 200}ms` }}
+                style={{ transitionDelay: `${index * 150}ms` }}
                 onMouseEnter={() => setHoveredProject(project.id)}
                 onMouseLeave={() => setHoveredProject(null)}
               >
@@ -255,11 +265,17 @@ export function Projects() {
                           hoveredProject === project.id 
                             ? 'rotate-12 scale-110 animate-pulse shadow-lg' 
                             : 'group-hover:rotate-12 group-hover:scale-110'
-                        }`}>
+                        } ${
+                          isProjectVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-0'
+                        }`}
+                        style={{ transitionDelay: `${index * 150 + 200}ms` }}>
                           {project.icon}
                         </div>
                         <div className="flex-1">
-                          <div className="flex items-center gap-2 mb-1">
+                          <div className={`flex items-center gap-2 mb-1 transition-all duration-500 ${
+                            isProjectVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-4'
+                          }`}
+                          style={{ transitionDelay: `${index * 150 + 300}ms` }}>
                             <h3 className={`text-lg font-bold transition-all duration-300 ${
                               hoveredProject === project.id
                                 ? 'text-transparent bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text'
@@ -279,7 +295,7 @@ export function Projects() {
                             } ${hoveredProject === project.id ? 'animate-pulse' : ''}`}></div>
                           </div>
                           {/* Subtitle */}
-                          <p className={`text-xs font-medium transition-all duration-300 ${
+                          <p className={`text-xs font-medium transition-all duration-500 ${
                             project.accent === 'purple' 
                               ? 'text-purple-600 dark:text-purple-400' 
                               : project.accent === 'blue' 
@@ -287,7 +303,10 @@ export function Projects() {
                               : project.accent === 'cyan' 
                               ? 'text-cyan-600 dark:text-cyan-400'
                               : 'text-indigo-600 dark:text-indigo-400'
-                          }`}>
+                          } ${
+                            isProjectVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-4'
+                          }`}
+                          style={{ transitionDelay: `${index * 150 + 400}ms` }}>
                             {project.id === 1 ? 'Biomedical AI Assistant' : 
                              project.id === 2 ? 'Smart Email Automation' :
                              project.id === 3 ? 'Travel Social Platform' :
@@ -298,7 +317,10 @@ export function Projects() {
                     </div>
 
                     {/* Description with left accent */}
-                    <div className="relative mb-6">
+                    <div className={`relative mb-6 transition-all duration-500 ${
+                      isProjectVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+                    }`}
+                    style={{ transitionDelay: `${index * 150 + 500}ms` }}>
                       <div className={`absolute left-0 top-0 w-1 h-full rounded-full ${
                         project.accent === 'purple' 
                           ? 'bg-gradient-to-b from-purple-400 to-purple-600' 
@@ -320,14 +342,14 @@ export function Projects() {
                       {project.tech.map((tech, techIndex) => (
                         <span
                           key={tech}
-                          className={`px-3 py-1 text-xs rounded-lg border transition-all duration-300 hover:scale-110 hover:-translate-y-1 cursor-default bg-gray-100 dark:bg-gray-800 border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300 hover:border-purple-300 dark:hover:border-purple-500 ${
+                          className={`px-3 py-1 text-xs rounded-lg border transition-all duration-500 hover:scale-110 hover:-translate-y-1 cursor-default bg-gray-100 dark:bg-gray-800 border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300 hover:border-purple-300 dark:hover:border-purple-500 ${
                             hoveredProject === project.id && isProjectVisible ? 'animate-bounce' : ''
                           } ${
                             isProjectVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2'
                           }`}
                           style={{ 
                             animationDelay: `${techIndex * 100}ms`,
-                            transitionDelay: isProjectVisible ? `${index * 200 + 300 + (techIndex * 50)}ms` : '0ms'
+                            transitionDelay: `${index * 150 + 600 + (techIndex * 50)}ms`
                           }}
                         >
                           {tech}
@@ -338,7 +360,10 @@ export function Projects() {
                     {/* CTA Button */}
                     <button 
                       onClick={() => handleProjectClick(project.githubUrl)}
-                      className="w-full bg-gradient-to-r from-gray-900 to-gray-800 dark:from-white dark:to-gray-100 text-white dark:text-gray-900 py-3 rounded-xl font-semibold transition-all duration-500 hover:scale-105 hover:shadow-lg flex items-center justify-center gap-2 group/btn overflow-hidden relative"
+                      className={`w-full bg-gradient-to-r from-gray-900 to-gray-800 dark:from-white dark:to-gray-100 text-white dark:text-gray-900 py-3 rounded-xl font-semibold transition-all duration-500 hover:scale-105 hover:shadow-lg flex items-center justify-center gap-2 group/btn overflow-hidden relative ${
+                        isProjectVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+                      }`}
+                      style={{ transitionDelay: `${index * 150 + 800}ms` }}
                     >
                       <span className={`absolute inset-0 bg-gradient-to-r from-purple-600 to-blue-600 transition-opacity duration-500 ${
                         hoveredProject === project.id ? 'opacity-100' : 'opacity-0 group-hover/btn:opacity-100'

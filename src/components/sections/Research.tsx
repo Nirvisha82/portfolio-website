@@ -3,9 +3,8 @@
 import { useState, useEffect } from 'react'
 import { ExternalLink, Calendar, BookOpen, ChevronLeft, ChevronRight } from 'lucide-react'
 
-export function Research() {
-  const [currentPaper, setCurrentPaper] = useState(0)
-  const [isFlipping, setIsFlipping] = useState(false)
+// Unified scroll animation hook
+function useScrollAnimation() {
   const [isVisible, setIsVisible] = useState(false)
   const [visiblePapers, setVisiblePapers] = useState<number[]>([])
 
@@ -14,16 +13,17 @@ export function Research() {
       ([entry]) => {
         if (entry.isIntersecting) {
           setIsVisible(true)
-          setTimeout(() => {
-            publications.forEach((_, index) => {
-              setTimeout(() => {
-                setVisiblePapers(prev => [...prev, index])
-              }, index * 200)
-            })
-          }, 300)
+          // Stagger paper animations
+          setTimeout(() => setVisiblePapers([0]), 200)
+          setTimeout(() => setVisiblePapers([0, 1]), 350)
+          setTimeout(() => setVisiblePapers([0, 1, 2]), 500)
+          setTimeout(() => setVisiblePapers([0, 1, 2, 3]), 650)
         }
       },
-      { threshold: 0.2 }
+      { 
+        threshold: 0.15,
+        rootMargin: '0px 0px -50px 0px'
+      }
     )
 
     const section = document.getElementById('research')
@@ -31,6 +31,14 @@ export function Research() {
 
     return () => observer.disconnect()
   }, [])
+
+  return { isVisible, visiblePapers }
+}
+
+export function Research() {
+  const [currentPaper, setCurrentPaper] = useState(0)
+  const [isFlipping, setIsFlipping] = useState(false)
+  const { isVisible, visiblePapers } = useScrollAnimation()
 
   const publications = [
     {
@@ -116,19 +124,27 @@ export function Research() {
       transitionProperty: 'transform, opacity, z-index',
       transitionDuration: '0.8s',
       transitionTimingFunction: 'ease-out',
-      transitionDelay: isItemVisible ? `${index * 200}ms` : '0ms'
+      transitionDelay: isItemVisible ? `${index * 150}ms` : '0ms'
     }
   }
 
   return (
-    <section id="research" className="py-16 sm:py-20 px-4 sm:px-6 relative overflow-hidden">
+    <section id="research" data-scroll-section className="py-16 sm:py-20 px-4 sm:px-6 relative overflow-hidden">
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-1/4 right-1/6 w-60 sm:w-80 h-60 sm:h-80 bg-indigo-400/5 dark:bg-indigo-400/10 rounded-full blur-3xl animate-breathe"></div>
-        <div className="absolute bottom-1/4 left-1/6 w-72 sm:w-96 h-72 sm:h-96 bg-purple-400/5 dark:bg-purple-400/10 rounded-full blur-3xl animate-breathe" style={{animationDelay: '3s'}}></div>
+        <div className={`absolute top-1/4 right-1/6 w-60 sm:w-80 h-60 sm:h-80 bg-indigo-400/5 dark:bg-indigo-400/10 rounded-full blur-3xl animate-breathe transition-all duration-700 ${
+          isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-75'
+        }`}
+        style={{ transitionDelay: '200ms' }}></div>
+        <div className={`absolute bottom-1/4 left-1/6 w-72 sm:w-96 h-72 sm:h-96 bg-purple-400/5 dark:bg-purple-400/10 rounded-full blur-3xl animate-breathe transition-all duration-700 ${
+          isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-75'
+        }`}
+        style={{ animationDelay: '3s', transitionDelay: '400ms' }}></div>
       </div>
 
       <div className="max-w-6xl mx-auto relative z-10">
-        <div className={`text-center mb-6 sm:mb-8 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+        <div className={`text-center mb-6 sm:mb-8 transition-all duration-700 ease-out ${
+          isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+        }`}>
           <span className="inline-flex items-center gap-2 px-3 sm:px-4 py-2 bg-gradient-to-r from-purple-100 to-blue-100 dark:from-purple-900/30 dark:to-blue-900/30 text-purple-600 dark:text-purple-400 rounded-full text-sm font-medium mb-4 border border-purple-200 dark:border-purple-800">
             <span className="animate-bounce">📚</span> Research Contributions
           </span>
@@ -140,25 +156,34 @@ export function Research() {
           </p>
         </div>
 
-        <div className={`relative max-w-full sm:max-w-3xl mx-auto mb-6 sm:mb-8 px-12 sm:px-0 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`} style={{ transitionDelay: '200ms' }}>
+        <div className={`relative max-w-full sm:max-w-3xl mx-auto mb-6 sm:mb-8 px-12 sm:px-0 transition-all duration-700 ease-out ${
+          isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
+        }`} 
+        style={{ transitionDelay: '200ms' }}>
           <div className="relative h-[500px] sm:h-[400px] perspective-1000">
-            <div className={`absolute -left-12 sm:-left-12 top-[44%] sm:top-1/2 transform -translate-y-1/2 z-50 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-4'}`} style={{ transitionDelay: '400ms' }}>
+            <div className={`absolute -left-12 sm:-left-12 top-[44%] sm:top-1/2 transform -translate-y-1/2 z-50 transition-all duration-700 ease-out ${
+              isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-4'
+            }`} 
+            style={{ transitionDelay: '400ms' }}>
               <button
                 onClick={handlePrevPaper}
                 disabled={isFlipping}
-                className="w-10 h-10 bg-white dark:bg-gray-800 rounded-full shadow-lg border border-gray-200 dark:border-gray-700 flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed group hover:shadow-xl"
+                className="w-10 h-10 bg-white dark:bg-gray-800 rounded-full shadow-lg border border-gray-200 dark:border-gray-700 flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed group hover:shadow-xl transition-all duration-300"
               >
-                <ChevronLeft size={18} className="text-gray-600 dark:text-gray-300 group-hover:text-purple-600 dark:group-hover:text-purple-400" />
+                <ChevronLeft size={18} className="text-gray-600 dark:text-gray-300 group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors duration-300" />
               </button>
             </div>
 
-            <div className={`absolute -right-12 sm:-right-12 top-[44%] sm:top-1/2 transform -translate-y-1/2 z-50 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-4'}`} style={{ transitionDelay: '400ms' }}>
+            <div className={`absolute -right-12 sm:-right-12 top-[44%] sm:top-1/2 transform -translate-y-1/2 z-50 transition-all duration-700 ease-out ${
+              isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-4'
+            }`} 
+            style={{ transitionDelay: '400ms' }}>
               <button
                 onClick={handleNextPaper}
                 disabled={isFlipping}
-                className="w-10 h-10 bg-white dark:bg-gray-800 rounded-full shadow-lg border border-gray-200 dark:border-gray-700 flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed group hover:shadow-xl"
+                className="w-10 h-10 bg-white dark:bg-gray-800 rounded-full shadow-lg border border-gray-200 dark:border-gray-700 flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed group hover:shadow-xl transition-all duration-300"
               >
-                <ChevronRight size={18} className="text-gray-600 dark:text-gray-300 group-hover:text-purple-600 dark:group-hover:text-purple-400" />
+                <ChevronRight size={18} className="text-gray-600 dark:text-gray-300 group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors duration-300" />
               </button>
             </div>
 
@@ -167,7 +192,10 @@ export function Research() {
                 <div className="w-full h-full bg-white dark:bg-gray-900 backdrop-blur-sm rounded-lg sm:rounded-xl shadow-2xl border border-gray-200 dark:border-gray-700 relative overflow-hidden">
                   <div className="p-4 sm:p-6 relative z-10 h-full flex flex-col">
                     <div className="mb-3 sm:mb-4">
-                      <div className="flex items-center justify-between mb-2 sm:mb-3">
+                      <div className={`flex items-center justify-between mb-2 sm:mb-3 transition-all duration-500 ${
+                        visiblePapers.includes(index) ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2'
+                      }`}
+                      style={{ transitionDelay: `${index * 150 + 300}ms` }}>
                         <div className="flex items-center gap-2">
                           <Calendar size={12} className="text-gray-500" />
                           <span className="text-xs text-gray-500 dark:text-gray-400 font-mono">{paper.year}</span>
@@ -177,35 +205,56 @@ export function Research() {
                         </div>
                       </div>
 
-                      <h3 className="text-base sm:text-lg font-bold text-gray-900 dark:text-white mb-2 leading-tight break-words line-clamp-3 sm:line-clamp-none">
+                      <h3 className={`text-base sm:text-lg font-bold text-gray-900 dark:text-white mb-2 leading-tight break-words line-clamp-3 sm:line-clamp-none transition-all duration-500 ${
+                        visiblePapers.includes(index) ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2'
+                      }`}
+                      style={{ transitionDelay: `${index * 150 + 400}ms` }}>
                         {paper.title}
                       </h3>
 
-                      <p className="text-xs sm:text-sm font-medium text-purple-600 dark:text-purple-400 italic mb-2 break-words">
+                      <p className={`text-xs sm:text-sm font-medium text-purple-600 dark:text-purple-400 italic mb-2 break-words transition-all duration-500 ${
+                        visiblePapers.includes(index) ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2'
+                      }`}
+                      style={{ transitionDelay: `${index * 150 + 500}ms` }}>
                         📰 {paper.journal}
                       </p>
                     </div>
 
-                    <div className="flex-1 mb-4 sm:mb-4">
+                    <div className={`flex-1 mb-4 sm:mb-4 transition-all duration-500 ${
+                      visiblePapers.includes(index) ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2'
+                    }`}
+                    style={{ transitionDelay: `${index * 150 + 600}ms` }}>
                       <p className="text-gray-600 dark:text-gray-300 leading-relaxed text-xs sm:text-sm break-words line-clamp-5 sm:line-clamp-none">
                         {paper.description}
                       </p>
                     </div>
 
-                    <div className="mb-6 sm:mb-4">
+                    <div className={`mb-6 sm:mb-4 transition-all duration-500 ${
+                      visiblePapers.includes(index) ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2'
+                    }`}
+                    style={{ transitionDelay: `${index * 150 + 700}ms` }}>
                       <h4 className="font-semibold text-gray-900 dark:text-white mb-2 text-xs sm:text-sm">
                         Keywords
                       </h4>
                       <div className="flex flex-wrap gap-1 sm:gap-1.5 mb-4 sm:mb-0">
                         {paper.tech.map((tech, idx) => (
-                          <span key={idx} className="px-1.5 sm:px-2 py-0.5 sm:py-1 bg-gray-100 dark:bg-gray-800 text-xs text-gray-700 dark:text-gray-300 rounded border border-gray-200 dark:border-gray-700 hover:border-purple-300 dark:hover:border-purple-500 transition-all duration-300 break-words">
+                          <span 
+                            key={idx} 
+                            className={`px-1.5 sm:px-2 py-0.5 sm:py-1 bg-gray-100 dark:bg-gray-800 text-xs text-gray-700 dark:text-gray-300 rounded border border-gray-200 dark:border-gray-700 hover:border-purple-300 dark:hover:border-purple-500 transition-all duration-300 break-words ${
+                              visiblePapers.includes(index) ? 'opacity-100 scale-100' : 'opacity-0 scale-75'
+                            }`}
+                            style={{ transitionDelay: `${index * 150 + 800 + (idx * 50)}ms` }}
+                          >
                             {tech}
                           </span>
                         ))}
                       </div>
                     </div>
 
-                    <div className="mt-auto">
+                    <div className={`mt-auto transition-all duration-500 ${
+                      visiblePapers.includes(index) ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+                    }`}
+                    style={{ transitionDelay: `${index * 150 + 900}ms` }}>
                       <a 
                         href={paper.url}
                         target="_blank"
@@ -233,7 +282,10 @@ export function Research() {
           </div>
         </div>
 
-        <div className={`flex justify-center gap-2 mb-6 sm:hidden transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`} style={{ transitionDelay: '500ms' }}>
+        <div className={`flex justify-center gap-2 mb-6 sm:hidden transition-all duration-700 ease-out ${
+          isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+        }`} 
+        style={{ transitionDelay: '500ms' }}>
           {publications.map((_, index) => (
             <button
               key={index}
@@ -246,12 +298,17 @@ export function Research() {
                   }, 400)
                 }
               }}
-              className={`w-2 h-2 rounded-full transition-all duration-300 ${index === currentPaper ? 'bg-purple-600 dark:bg-purple-400 w-6' : 'bg-gray-300 dark:bg-gray-600'}`}
+              className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                index === currentPaper ? 'bg-purple-600 dark:bg-purple-400 w-6' : 'bg-gray-300 dark:bg-gray-600'
+              }`}
             />
           ))}
         </div>
 
-        <div className={`text-center transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`} style={{ transitionDelay: '600ms' }}>
+        <div className={`text-center transition-all duration-700 ease-out ${
+          isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+        }`} 
+        style={{ transitionDelay: '600ms' }}>
           <a 
             href="https://scholar.google.com/citations?user=levmF9MAAAAJ&hl=en" 
             target="_blank" 
@@ -277,6 +334,18 @@ export function Research() {
         }
         .animate-breathe {
           animation: breathe 8s ease-in-out infinite;
+        }
+        .line-clamp-3 {
+          display: -webkit-box;
+          -webkit-line-clamp: 3;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
+        }
+        .line-clamp-5 {
+          display: -webkit-box;
+          -webkit-line-clamp: 5;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
         }
       `}</style>
     </section>
