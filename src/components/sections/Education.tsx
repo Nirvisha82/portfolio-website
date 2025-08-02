@@ -6,6 +6,7 @@ export function Education() {
   const [activeScroll, setActiveScroll] = useState<number | null>(null)
   const [isVisible, setIsVisible] = useState(false)
   const [visibleItems, setVisibleItems] = useState<number[]>([])
+  const [isMobile, setIsMobile] = useState(false)
 
   const education = [
     {
@@ -49,6 +50,19 @@ export function Education() {
     }
   ]
 
+  // Detect if device supports hover (desktop) or not (mobile/touch)
+  useEffect(() => {
+    const checkIsMobile = () => {
+      const hasTouchScreen = 'ontouchstart' in window || navigator.maxTouchPoints > 0
+      const isSmallScreen = window.innerWidth < 1024
+      setIsMobile(hasTouchScreen || isSmallScreen)
+    }
+    
+    checkIsMobile()
+    window.addEventListener('resize', checkIsMobile)
+    return () => window.removeEventListener('resize', checkIsMobile)
+  }, [])
+
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -82,6 +96,22 @@ export function Education() {
     }
   }, [education.length])
 
+  const handleCardInteraction = (eduId: number) => {
+    setActiveScroll(activeScroll === eduId ? null : eduId)
+  }
+
+  const handleMouseEnter = (eduId: number) => {
+    if (!isMobile) {
+      setActiveScroll(eduId)
+    }
+  }
+
+  const handleMouseLeave = () => {
+    if (!isMobile) {
+      setActiveScroll(null)
+    }
+  }
+
   const getUniversityLogo = (logo: string) => {
     if (logo === "UF") {
       return (
@@ -108,17 +138,17 @@ export function Education() {
   }
 
   return (
-    <section id="education" className="py-16 sm:py-20 px-4 sm:px-6 relative">
+    <section id="education" className="py-12 sm:py-16 lg:py-20 px-4 sm:px-6 relative">
       <div className="max-w-6xl mx-auto relative z-10">
         {/* Section Header */}
-        <div className={`text-center mb-12 sm:mb-16 transition-all duration-1000 ${
+        <div className={`text-center mb-8 sm:mb-12 lg:mb-16 transition-all duration-1000 ${
           isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
         }`}>
-          <span className="inline-flex items-center gap-2 px-3 sm:px-4 py-2 bg-gradient-to-r from-purple-100 to-blue-100 dark:from-purple-900/30 dark:to-blue-900/30 text-purple-600 dark:text-purple-400 rounded-full text-sm font-medium mb-4 border border-purple-200 dark:border-purple-800">
+          <span className="inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2 bg-gradient-to-r from-purple-100 to-blue-100 dark:from-purple-900/30 dark:to-blue-900/30 text-purple-600 dark:text-purple-400 rounded-full text-sm font-medium mb-3 sm:mb-4 border border-purple-200 dark:border-purple-800">
             <span className="animate-bounce">🎓</span>
             Academic Journey
           </span>
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 dark:text-white mb-3 sm:mb-4">
             Education 
           </h2>
           <p className="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto text-sm sm:text-base px-4">
@@ -127,7 +157,7 @@ export function Education() {
         </div>
 
         {/* Academic Scrolls */}
-        <div className="space-y-6 sm:space-y-8">
+        <div className="space-y-4 sm:space-y-6 lg:space-y-8">
           {education.map((edu, index) => {
             const isItemVisible = visibleItems.includes(index)
             
@@ -142,24 +172,23 @@ export function Education() {
                 style={{ 
                   transitionDelay: isItemVisible ? '0ms' : `${index * 300}ms` 
                 }}
-                onMouseEnter={() => setActiveScroll(edu.id)}
-                onMouseLeave={() => setActiveScroll(null)}
-                onClick={() => {
-                  // Always allow click/tap to toggle on mobile, but don't interfere with hover on desktop
-                  setActiveScroll(activeScroll === edu.id ? null : edu.id);
-                }}
+                onMouseEnter={() => handleMouseEnter(edu.id)}
+                onMouseLeave={handleMouseLeave}
               >
                 {/* Scroll Container */}
                 <div className={`relative ${
                   edu.color === 'purple' 
                     ? 'bg-gradient-to-r from-purple-50 to-indigo-50 dark:from-purple-900/20 dark:to-indigo-900/20 border-purple-200 dark:border-purple-800' 
                     : 'bg-gradient-to-r from-blue-50 to-cyan-50 dark:from-blue-900/20 dark:to-cyan-900/20 border-blue-200 dark:border-blue-800'
-                } rounded-xl sm:rounded-2xl border-2 transition-all duration-700 hover:shadow-2xl ${
+                } rounded-xl sm:rounded-2xl border-2 transition-all duration-700 hover:shadow-xl sm:hover:shadow-2xl ${
                   activeScroll === edu.id ? 'scale-102' : ''
                 }`}>
                   
                   {/* Scroll Header */}
-                  <div className="p-4 sm:p-6 cursor-pointer">
+                  <div 
+                    className="p-4 sm:p-6 cursor-pointer"
+                    onClick={() => handleCardInteraction(edu.id)}
+                  >
                     <div className="flex items-start sm:items-center justify-between gap-3">
                       <div className="flex items-start sm:items-center gap-3 sm:gap-4 flex-1 min-w-0">
                         {/* University Logo */}
@@ -196,7 +225,7 @@ export function Education() {
                           </div>
 
                           {/* Degree Info */}
-                          <h3 className={`text-lg sm:text-xl md:text-2xl font-bold transition-all duration-300 break-words ${
+                          <h3 className={`text-lg sm:text-xl lg:text-2xl font-bold transition-all duration-300 break-words ${
                             activeScroll === edu.id
                               ? `text-transparent bg-gradient-to-r ${
                                   edu.color === 'purple' 
