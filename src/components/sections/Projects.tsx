@@ -129,7 +129,7 @@ export function Projects() {
 
   if (!mounted) {
     return (
-      <section id="projects" data-scroll-section className="py-20 px-6 relative overflow-hidden">
+      <section id="projects" data-scroll-section className="py-12 sm:py-16 lg:py-20 px-6 relative overflow-hidden">
         <div className="max-w-6xl mx-auto relative z-10">
           <div className="text-center mb-16">
             <div className="inline-block">

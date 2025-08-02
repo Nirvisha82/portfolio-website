@@ -94,7 +94,7 @@ export function Skills() {
   ]
 
   return (
-    <section id="skills" data-scroll-section className="py-20 px-6 relative">
+    <section id="skills" data-scroll-section className="py-12 sm:py-16 lg:py-20 px-6 relative">
       <div className="max-w-6xl mx-auto">
         {/* Section Header */}
         <div className={`text-center mb-16 transition-all duration-700 ease-out ${

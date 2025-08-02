@@ -129,7 +129,7 @@ export function Research() {
   }
 
   return (
-    <section id="research" data-scroll-section className="py-16 sm:py-20 px-4 sm:px-6 relative overflow-hidden">
+    <section id="research" data-scroll-section className="py-12 sm:py-16 lg:py-20 px-4 sm:px-6 relative overflow-hidden">
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className={`absolute top-1/4 right-1/6 w-60 sm:w-80 h-60 sm:h-80 bg-indigo-400/5 dark:bg-indigo-400/10 rounded-full blur-3xl animate-breathe transition-all duration-700 ${
           isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-75'

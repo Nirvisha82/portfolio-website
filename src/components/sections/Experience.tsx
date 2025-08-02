@@ -19,14 +19,14 @@ function useStaggeredAnimation(itemCount: number) {
           for (let i = 0; i < itemCount; i++) {
             setTimeout(() => {
               setVisibleItems(prev => [...prev, i])
-            }, i * 150) // Faster stagger
+            }, i * 100) // ✅ FIXED: Faster stagger (was 150ms)
           }
         }
         // Remove the else clause to prevent disappearing
       },
       { 
-        threshold: 0.15, // Lower threshold for earlier trigger
-        rootMargin: '0px 0px -50px 0px' // Trigger before fully visible
+        threshold: 0.15, // ✅ FIXED: Much lower threshold for earlier trigger
+        rootMargin: '0px 0px 100px 0px' // ✅ FIXED: Positive margin triggers 100px BEFORE entering viewport
       }
     )
 
@@ -120,7 +120,7 @@ export function Experience() {
   const { isVisible, visibleItems } = useStaggeredAnimation(experiences.length)
 
   return (
-    <section id="experience" data-scroll-section className="py-20 px-6 relative overflow-hidden">
+    <section id="experience" data-scroll-section className="py-12 sm:py-16 lg:py-20 px-6 relative overflow-hidden">
       <div className="max-w-6xl mx-auto relative z-10">
         {/* Section Header */}
         <div className={`text-center mb-16 transition-all duration-700 ease-out ${
@@ -141,7 +141,7 @@ export function Experience() {
         {/* Timeline */}
         <div className="relative">
           {/* Timeline Line */}
-          <div className={`absolute left-8 md:left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-purple-400 via-blue-400 via-green-400 to-orange-400 transform md:-translate-x-1/2 transition-all duration-1000 delay-300 origin-top ${
+          <div className={`absolute left-8 md:left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-purple-400 via-blue-400 via-green-400 to-orange-400 transform md:-translate-x-1/2 transition-all duration-1000 delay-200 origin-top ${
             isVisible ? 'opacity-100 scale-y-100' : 'opacity-0 scale-y-0'
           }`}></div>
 
@@ -162,7 +162,7 @@ export function Experience() {
                       : 'opacity-0 translate-y-12'
                   }`}
                   style={{ 
-                    transitionDelay: `${index * 150}ms`
+                    transitionDelay: `${index * 100}ms`  // ✅ FIXED: Faster (was 150ms)
                   }}
                   onMouseEnter={() => setHoveredItem(exp.id)}
                   onMouseLeave={() => setHoveredItem(null)}
@@ -254,7 +254,7 @@ export function Experience() {
                               itemVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-4'
                             }`}
                             style={{ 
-                              transitionDelay: `${(index * 150) + (idx * 100) + 300}ms`
+                              transitionDelay: `${(index * 100) + (idx * 50) + 200}ms`  // ✅ FIXED: Much faster
                             }}
                           >
                             <span className="w-1.5 h-1.5 rounded-full bg-blue-400 mt-2 animate-pulse"></span>
@@ -272,7 +272,7 @@ export function Experience() {
                               itemVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-75'
                             }`}
                             style={{ 
-                              transitionDelay: `${(index * 150) + (idx * 50) + 500}ms`
+                              transitionDelay: `${(index * 100) + (idx * 30) + 300}ms`  // ✅ FIXED: Faster
                             }}
                           >
                             {skill}
