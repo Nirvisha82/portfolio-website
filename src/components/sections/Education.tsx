@@ -60,7 +60,7 @@ export function Education() {
       id: 2,
       degree: "Bachelor of Science", 
       field: "Information Technology",
-      university: "Vishwakarma Institute of Technology",
+      university: "Vishwakarma Institute of Technology (Pune University)",
       location: "Pune, Maharashtra, India", 
       duration: "2019 - 2023",
       status: "Completed",

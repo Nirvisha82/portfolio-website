@@ -57,7 +57,7 @@ export function About() {
             Get to know me better
           </h2>
           <p className="text-sm sm:text-base text-gray-600 dark:text-gray-300 max-w-2xl mx-auto px-4">
-            Building the future, one line of code at a time
+            Always learning, always building, always growing
           </p>
         </div>
 

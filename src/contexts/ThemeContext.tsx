@@ -1,4 +1,3 @@
-
 'use client'
 import { createContext, useContext, useEffect, useState } from 'react'
 
@@ -33,13 +32,33 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     }
   }, [])
 
-  // Apply theme to document
+  // Apply theme to document with Safari mobile fixes
   const applyTheme = (newTheme: Theme) => {
     const root = document.documentElement
+    const body = document.body
+    
     if (newTheme === 'dark') {
       root.classList.add('dark')
+      root.style.colorScheme = 'dark'
+      
+      // Safari mobile specific fix
+      const isSafariMobile = /^((?!chrome|android).)*safari/i.test(navigator.userAgent) && /iPhone|iPad|iPod/i.test(navigator.userAgent)
+      if (isSafariMobile) {
+        body.style.background = 'linear-gradient(135deg, #0f0b27 0%, #1a1332 25%, #231944 50%, #1a1332 75%, #0f0b27 100%)'
+        // Force a reflow
+        void body.offsetHeight
+      }
     } else {
       root.classList.remove('dark')
+      root.style.colorScheme = 'light'
+      
+      // Safari mobile specific fix
+      const isSafariMobile = /^((?!chrome|android).)*safari/i.test(navigator.userAgent) && /iPhone|iPad|iPod/i.test(navigator.userAgent)
+      if (isSafariMobile) {
+        body.style.background = 'linear-gradient(135deg, #ffffff 0%, #f8fafc 25%, #f1f5f9 50%, #f8fafc 75%, #ffffff 100%)'
+        // Force a reflow
+        void body.offsetHeight
+      }
     }
   }
 
