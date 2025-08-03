@@ -75,7 +75,7 @@ export function Skills() {
         { name: "NumPy", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/numpy/numpy-original.svg", delay: 700 },
         { name: "Pandas", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pandas/pandas-original.svg", delay: 750 },
         { name: "Scikit-learn", logo: "https://upload.wikimedia.org/wikipedia/commons/0/05/Scikit_learn_logo_small.svg", delay: 800 },
-        { name: "Weights & Biases", logo: "https://logo.clearbit.com/wandb.ai", delay: 850 }
+        { name: "W&B", logo: "https://logo.clearbit.com/wandb.ai", delay: 850 }
       ]
     },
     {
@@ -102,13 +102,13 @@ export function Skills() {
         }`}>
           <span className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-purple-100 to-blue-100 dark:from-purple-900/30 dark:to-blue-900/30 text-purple-600 dark:text-purple-400 rounded-full text-sm font-medium mb-4 border border-purple-200 dark:border-purple-800">
             <span className="animate-bounce">💻</span>
-            Technical Arsenal
+            Tech Stack
           </span>
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
             Skills & Technologies
           </h2>
           <p className="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-            Core technologies organized by expertise area
+            The tools that power my projects and solutions
           </p>
         </div>
 

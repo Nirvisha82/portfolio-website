@@ -139,7 +139,7 @@ export function Projects() {
               </span>
             </div>
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
-              Projects that showcase my journey
+              Projects with Purpose
             </h2>
             <p className="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
               From concept to code - here&apos;s how I bring ideas to life
