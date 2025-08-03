@@ -9,6 +9,18 @@
   --foreground-dark: #f8fafc;
 }
 
+/* HORIZONTAL SCROLL FIX */
+html, body {
+  overflow-x: hidden !important;
+  width: 100% !important;
+  max-width: 100vw !important;
+  box-sizing: border-box;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
 /* Enhanced Light Mode Body - Smooth flowing gradient */
 body {
   background: linear-gradient(135deg, #ffffff 0%, #f8fafc 25%, #f1f5f9 50%, #f8fafc 75%, #ffffff 100%);
@@ -27,7 +39,7 @@ body::before {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
+  width: 100vw;
   height: 100%;
   pointer-events: none;
   z-index: -2;
@@ -38,6 +50,7 @@ body::before {
     linear-gradient(45deg, transparent 0%, rgba(139, 92, 246, 0.06) 50%, transparent 100%);
   animation: lightFlow 20s ease-in-out infinite;
   opacity: 1;
+  overflow: hidden;
 }
 
 /* Light Mode - NO GRID, just flowing gradients like dark mode */
@@ -46,7 +59,7 @@ body::after {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
+  width: 100vw;
   height: 100%;
   pointer-events: none;
   z-index: -1;
@@ -55,6 +68,7 @@ body::after {
     radial-gradient(circle at 80% 80%, rgba(59, 130, 246, 0.015) 0%, transparent 30%),
     radial-gradient(circle at 50% 50%, rgba(16, 185, 129, 0.01) 0%, transparent 25%);
   animation: lightBreathe 8s ease-in-out infinite;
+  overflow: hidden;
 }
 
 /* CORRECTED Dark Mode Body - Keep your original beautiful design */
@@ -88,7 +102,7 @@ html.dark body {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
+  width: 100vw;
   height: 100%;
   pointer-events: none;
   z-index: -2;
@@ -98,6 +112,7 @@ html.dark body {
   background-size: 60px 60px;
   animation: gridMove 30s linear infinite;
   opacity: 0.4;
+  overflow: hidden;
 }
 
 .dark body::after {
@@ -105,7 +120,7 @@ html.dark body {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
+  width: 100vw;
   height: 100%;
   pointer-events: none;
   z-index: -1;
@@ -114,6 +129,7 @@ html.dark body {
     radial-gradient(circle at 80% 80%, rgba(99, 102, 241, 0.015) 0%, transparent 30%),
     radial-gradient(circle at 50% 50%, rgba(167, 139, 250, 0.01) 0%, transparent 25%);
   animation: breathe 8s ease-in-out infinite;
+  overflow: hidden;
 }
 
 /* LIGHT MODE - Elegant floating particles */
@@ -121,11 +137,12 @@ html.dark body {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
+  width: 100vw;
   height: 100%;
   pointer-events: none;
   z-index: -1;
   opacity: 0.6;
+  overflow: hidden;
 }
 
 .particle {
@@ -154,11 +171,12 @@ html.dark body {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
+  width: 100vw;
   height: 100%;
   pointer-events: none;
   z-index: -1;
   opacity: 0.15;
+  overflow: hidden;
 }
 
 .accent-line {
@@ -166,6 +184,7 @@ html.dark body {
   height: 1px;
   background: linear-gradient(90deg, transparent, rgba(139, 92, 246, 0.2), transparent);
   animation: lineFlow 15s ease-in-out infinite;
+  max-width: calc(100vw - 50px);
 }
 
 /* Light Mode Constellation Effect - MATCH dark mode visibility */
@@ -173,11 +192,12 @@ html.dark body {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
+  width: 100vw;
   height: 100%;
   pointer-events: none;
   z-index: -1;
   opacity: 0.6;
+  overflow: hidden;
 }
 
 .light-constellation-dot {
@@ -208,6 +228,7 @@ html.dark body {
   background: linear-gradient(90deg, transparent, rgba(139, 92, 246, 0.3), transparent);
   animation: lightFadeInOut 8s ease-in-out infinite;
   transform-origin: left;
+  max-width: calc(100vw - 100px);
 }
 
 /* Constellation Effect for Dark Mode */
@@ -215,11 +236,12 @@ html.dark body {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
+  width: 100vw;
   height: 100%;
   pointer-events: none;
   z-index: -1;
   opacity: 0.6;
+  overflow: hidden;
 }
 
 .constellation-dot {
@@ -250,6 +272,7 @@ html.dark body {
   background: linear-gradient(90deg, transparent, rgba(139, 92, 246, 0.1), transparent);
   animation: fadeInOut 8s ease-in-out infinite;
   transform-origin: left;
+  max-width: calc(100vw - 100px);
 }
 
 /* Optional: Very subtle floating dots (barely visible) */
@@ -257,7 +280,7 @@ html.dark body {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
+  width: 100vw;
   height: 100%;
   pointer-events: none;
   z-index: -1;
@@ -269,10 +292,50 @@ html.dark body {
     radial-gradient(1px 1px at 450px 350px, rgba(139, 92, 246, 0.1), transparent);
   background-size: 800px 600px;
   animation: dotsFloat 30s linear infinite;
+  overflow: hidden;
 }
 
 .dark .subtle-dots {
   opacity: 0.15;
+}
+
+/* Ensure all sections stay within viewport */
+section {
+  width: 100%;
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+main {
+  width: 100%;
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+/* Fix for mobile devices specifically */
+@media (max-width: 768px) {
+  /* Ensure constellation elements don't cause horizontal scroll */
+  .light-constellation-dot[style*="left: 85%"],
+  .constellation-dot[style*="left: 85%"] {
+    left: 75% !important;
+  }
+  
+  .light-constellation-line,
+  .constellation-line {
+    max-width: calc(100vw - 150px) !important;
+  }
+  
+  .accent-line {
+    max-width: calc(100vw - 30px) !important;
+  }
+  
+  /* Ensure hero content container doesn't overflow */
+  .hero-content {
+    width: 100%;
+    max-width: 100%;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
 }
 
 /* FIXED: Education and Experience sections - ensure consistent dark background */

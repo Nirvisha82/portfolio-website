@@ -31,118 +31,118 @@ export default function Home() {
       {/* Keep scroll progress bar */}
       <div className="scroll-progress"></div>
       
-      {/* LIGHT MODE - Purple Constellation (12 dots total) */}
+      {/* LIGHT MODE - Purple Constellation (12 dots total) - MOBILE OPTIMIZED */}
       <div className="light-constellation block dark:hidden">
         <div className="light-constellation-dot" style={{top: '20%', left: '15%', animationDelay: '0s'}}></div>
         <div className="light-constellation-dot" style={{top: '35%', left: '25%', animationDelay: '1s'}}></div>
         <div className="light-constellation-dot" style={{top: '60%', left: '10%', animationDelay: '2s'}}></div>
         <div className="light-constellation-dot" style={{top: '80%', left: '30%', animationDelay: '3s'}}></div>
         <div className="light-constellation-dot" style={{top: '25%', left: '70%', animationDelay: '1.5s'}}></div>
-        <div className="light-constellation-dot" style={{top: '45%', left: '85%', animationDelay: '2.5s'}}></div>
+        <div className="light-constellation-dot" style={{top: '45%', left: '75%', animationDelay: '2.5s'}}></div>
         <div className="light-constellation-dot" style={{top: '70%', left: '75%', animationDelay: '0.5s'}}></div>
         <div className="light-constellation-dot" style={{top: '15%', left: '50%', animationDelay: '3.5s'}}></div>
         
-        {/* Just 4 additional dots for perfect balance */}
-        <div className="light-constellation-dot" style={{top: '10%', left: '85%', animationDelay: '4s'}}></div>
+        {/* Just 4 additional dots for perfect balance - MOBILE SAFE POSITIONS */}
+        <div className="light-constellation-dot" style={{top: '10%', left: '75%', animationDelay: '4s'}}></div>
         <div className="light-constellation-dot" style={{top: '55%', left: '40%', animationDelay: '5s'}}></div>
         <div className="light-constellation-dot" style={{top: '75%', left: '50%', animationDelay: '2.2s'}}></div>
         <div className="light-constellation-dot" style={{top: '5%', left: '25%', animationDelay: '4.5s'}}></div>
         
-        {/* Light mode constellation connecting lines */}
+        {/* Light mode constellation connecting lines - SHORTENED FOR MOBILE */}
         <div className="light-constellation-line" style={{
           top: '20%', 
           left: '15%', 
-          width: '120px', 
+          width: '100px', 
           transform: 'rotate(35deg)',
           animationDelay: '4s'
         }}></div>
         <div className="light-constellation-line" style={{
           top: '35%', 
           left: '25%', 
-          width: '90px', 
+          width: '80px', 
           transform: 'rotate(-20deg)',
           animationDelay: '5s'
         }}></div>
         <div className="light-constellation-line" style={{
           top: '25%', 
           left: '50%', 
-          width: '180px', 
+          width: '120px', 
           transform: 'rotate(15deg)',
           animationDelay: '6s'
         }}></div>
         <div className="light-constellation-line" style={{
           top: '55%', 
           left: '40%', 
-          width: '100px', 
+          width: '90px', 
           transform: 'rotate(-10deg)',
           animationDelay: '7s'
         }}></div>
       </div>
       
-      {/* LIGHT MODE - Elegant Particles (replace ugly bubbles) */}
+      {/* LIGHT MODE - Elegant Particles (MOBILE SAFE POSITIONS) */}
       <div className="light-particles block dark:hidden">
         <div className="particle" style={{top: '10%', left: '15%', animationDelay: '0s'}}></div>
-        <div className="particle" style={{top: '25%', left: '75%', animationDelay: '2s'}}></div>
-        <div className="particle" style={{top: '45%', left: '85%', animationDelay: '4s'}}></div>
+        <div className="particle" style={{top: '25%', left: '70%', animationDelay: '2s'}}></div>
+        <div className="particle" style={{top: '45%', left: '75%', animationDelay: '4s'}}></div>
         <div className="particle" style={{top: '35%', left: '25%', animationDelay: '1s'}}></div>
         <div className="particle" style={{top: '60%', left: '10%', animationDelay: '3s'}}></div>
         <div className="particle" style={{top: '70%', left: '65%', animationDelay: '5s'}}></div>
         <div className="particle" style={{top: '80%', left: '30%', animationDelay: '6s'}}></div>
         <div className="particle" style={{top: '15%', left: '50%', animationDelay: '7s'}}></div>
         <div className="particle" style={{top: '55%', left: '45%', animationDelay: '8s'}}></div>
-        <div className="particle" style={{top: '85%', left: '80%', animationDelay: '9s'}}></div>
+        <div className="particle" style={{top: '85%', left: '70%', animationDelay: '9s'}}></div>
       </div>
       
-      {/* Light Mode - Subtle accent lines */}
+      {/* Light Mode - Subtle accent lines - MOBILE SAFE SIZES */}
       <div className="light-accent-lines block dark:hidden">
-        <div className="accent-line" style={{top: '20%', left: '0%', width: '200px', animationDelay: '0s'}}></div>
-        <div className="accent-line" style={{top: '50%', right: '0%', width: '180px', animationDelay: '3s'}}></div>
-        <div className="accent-line" style={{top: '75%', left: '20%', width: '150px', animationDelay: '6s'}}></div>
+        <div className="accent-line" style={{top: '20%', left: '0%', width: '150px', animationDelay: '0s'}}></div>
+        <div className="accent-line" style={{top: '50%', right: '0%', width: '120px', animationDelay: '3s'}}></div>
+        <div className="accent-line" style={{top: '75%', left: '20%', width: '100px', animationDelay: '6s'}}></div>
       </div>
       
-      {/* Constellation Background Effect for Dark Mode (12 dots total) */}
+      {/* Constellation Background Effect for Dark Mode (12 dots total) - MOBILE OPTIMIZED */}
       <div className="dark-constellation hidden dark:block">
         <div className="constellation-dot" style={{top: '20%', left: '15%', animationDelay: '0s'}}></div>
         <div className="constellation-dot" style={{top: '35%', left: '25%', animationDelay: '1s'}}></div>
         <div className="constellation-dot" style={{top: '60%', left: '10%', animationDelay: '2s'}}></div>
         <div className="constellation-dot" style={{top: '80%', left: '30%', animationDelay: '3s'}}></div>
         <div className="constellation-dot" style={{top: '25%', left: '70%', animationDelay: '1.5s'}}></div>
-        <div className="constellation-dot" style={{top: '45%', left: '85%', animationDelay: '2.5s'}}></div>
+        <div className="constellation-dot" style={{top: '45%', left: '75%', animationDelay: '2.5s'}}></div>
         <div className="constellation-dot" style={{top: '70%', left: '75%', animationDelay: '0.5s'}}></div>
         <div className="constellation-dot" style={{top: '15%', left: '50%', animationDelay: '3.5s'}}></div>
         
-        {/* Just 4 additional dots for perfect balance */}
-        <div className="constellation-dot" style={{top: '10%', left: '85%', animationDelay: '4s'}}></div>
+        {/* Just 4 additional dots for perfect balance - MOBILE SAFE POSITIONS */}
+        <div className="constellation-dot" style={{top: '10%', left: '75%', animationDelay: '4s'}}></div>
         <div className="constellation-dot" style={{top: '55%', left: '40%', animationDelay: '5s'}}></div>
         <div className="constellation-dot" style={{top: '75%', left: '50%', animationDelay: '2.2s'}}></div>
         <div className="constellation-dot" style={{top: '5%', left: '25%', animationDelay: '4.5s'}}></div>
         
-        {/* Connecting lines between some dots */}
+        {/* Connecting lines between some dots - SHORTENED FOR MOBILE */}
         <div className="constellation-line" style={{
           top: '20%', 
           left: '15%', 
-          width: '120px', 
+          width: '100px', 
           transform: 'rotate(35deg)',
           animationDelay: '4s'
         }}></div>
         <div className="constellation-line" style={{
           top: '35%', 
           left: '25%', 
-          width: '90px', 
+          width: '80px', 
           transform: 'rotate(-20deg)',
           animationDelay: '5s'
         }}></div>
         <div className="constellation-line" style={{
           top: '25%', 
           left: '50%', 
-          width: '180px', 
+          width: '120px', 
           transform: 'rotate(15deg)',
           animationDelay: '6s'
         }}></div>
         <div className="constellation-line" style={{
           top: '55%', 
           left: '40%', 
-          width: '100px', 
+          width: '90px', 
           transform: 'rotate(-10deg)',
           animationDelay: '7s'
         }}></div>
@@ -153,20 +153,20 @@ export default function Home() {
       
       <Navigation />
       
-      <main>
-        {/* Hero Section - Responsive Centering */}
-        <section className="min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 relative overflow-hidden">
-          {/* Hero floating shapes - More subtle */}
-          <div className="absolute inset-0 overflow-hidden pointer-events-none">
-            <div className="absolute top-1/4 left-1/4 w-48 sm:w-64 h-48 sm:h-64 bg-purple-400/8 dark:bg-purple-400/20 rounded-full blur-3xl animate-pulse"></div>
-            <div className="absolute bottom-1/4 right-1/4 w-64 sm:w-96 h-64 sm:h-96 bg-blue-400/8 dark:bg-blue-400/20 rounded-full blur-3xl animate-pulse delay-1000"></div>
+      <main className="w-full max-w-full overflow-x-hidden">
+        {/* Hero Section - Mobile Responsive & No Horizontal Scroll */}
+        <section className="min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 relative overflow-hidden w-full max-w-full">
+          {/* Hero floating shapes - More subtle and mobile safe */}
+          <div className="absolute inset-0 overflow-hidden pointer-events-none w-full max-w-full">
+            <div className="absolute top-1/4 left-1/4 w-48 sm:w-64 h-48 sm:h-64 bg-purple-400/8 dark:bg-purple-400/20 rounded-full blur-3xl animate-pulse max-w-[200px]"></div>
+            <div className="absolute bottom-1/4 right-1/4 w-64 sm:w-96 h-64 sm:h-96 bg-blue-400/8 dark:bg-blue-400/20 rounded-full blur-3xl animate-pulse delay-1000 max-w-[250px]"></div>
             
-            {/* More subtle additional shapes for light mode */}
-            <div className="absolute top-1/2 right-1/3 w-24 sm:w-32 h-24 sm:h-32 bg-emerald-400/6 dark:bg-emerald-400/15 rounded-full blur-2xl animate-pulse delay-500 dark:hidden"></div>
-            <div className="absolute bottom-1/3 left-1/2 w-32 sm:w-48 h-32 sm:h-48 bg-rose-400/5 dark:bg-rose-400/12 rounded-full blur-2xl animate-pulse delay-1500 dark:hidden"></div>
+            {/* More subtle additional shapes for light mode - MOBILE SAFE */}
+            <div className="absolute top-1/2 right-1/3 w-24 sm:w-32 h-24 sm:h-32 bg-emerald-400/6 dark:bg-emerald-400/15 rounded-full blur-2xl animate-pulse delay-500 dark:hidden max-w-[100px]"></div>
+            <div className="absolute bottom-1/3 left-1/2 w-32 sm:w-48 h-32 sm:h-48 bg-rose-400/5 dark:bg-rose-400/12 rounded-full blur-2xl animate-pulse delay-1500 dark:hidden max-w-[150px]"></div>
           </div>
           
-          <div className="relative z-10 text-center max-w-6xl mx-auto w-full">
+          <div className="relative z-10 text-center max-w-6xl mx-auto w-full px-2 sm:px-4">
             
             {/* TOP SPACER - RESPONSIVE: Small on mobile, large on desktop */}
             <div className="mb-4 sm:mb-6 lg:mb-12 xl:mb-16">
@@ -177,8 +177,8 @@ export default function Home() {
               </span>
             </div>
             
-            {/* MAIN HEADING - Better mobile spacing */}
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-4 sm:mb-6 lg:mb-8 leading-tight text-gray-900 dark:text-white px-2">
+            {/* MAIN HEADING - Better mobile spacing and word wrap */}
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-4 sm:mb-6 lg:mb-8 leading-tight text-gray-900 dark:text-white px-2 break-words">
               Powering Real Impact with{' '}
               <span className="text-transparent bg-gradient-to-r from-purple-600 via-blue-600 to-cyan-600 bg-clip-text animate-gradient">
                 Reliable Code
@@ -188,21 +188,21 @@ export default function Home() {
             {/* BOTTOM CONTENT - Responsive spacing */}
             <div className="space-y-4 sm:space-y-6 lg:space-y-8">
               {/* Description */}
-              <p className="text-base sm:text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-4xl mx-auto leading-relaxed px-4">
+              <p className="text-base sm:text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-4xl mx-auto leading-relaxed px-4 break-words">
                 Hi! I&apos;m <strong className="text-purple-600 dark:text-purple-400">Nirvisha</strong>, a software developer specializing in 
                 <span className="text-blue-600 dark:text-blue-400"> backend systems</span> and 
                 <span className="text-cyan-600 dark:text-cyan-400"> AI solutions</span>.
               </p>
               
-              {/* CTA Buttons */}
-              <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center px-4">
+              {/* CTA Buttons - Mobile optimized */}
+              <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center px-4 w-full max-w-2xl mx-auto">
                 <button 
                   onClick={() => {
                     document.getElementById('projects')?.scrollIntoView({ 
                       behavior: 'smooth' 
                     })
                   }}
-                  className="group bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-purple-500/25 w-full sm:w-auto text-sm sm:text-base"
+                  className="group bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-purple-500/25 w-full sm:w-auto text-sm sm:text-base max-w-xs sm:max-w-none"
                 >
                   <span className="flex items-center justify-center gap-2">
                     See what I&apos;ve built
@@ -210,45 +210,44 @@ export default function Home() {
                   </span>
                 </button>
                 
-                
-<a
-  href="/resume.pdf"
-  download="Nirvisha_Soni_Resume.pdf"
-  className="group border-2 border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:border-purple-500 dark:hover:border-purple-400 hover:text-purple-600 dark:hover:text-purple-400 px-6 sm:px-8 py-3 sm:py-4 rounded-xl font-semibold transition-all duration-300 backdrop-blur-sm w-full sm:w-auto text-sm sm:text-base inline-block text-center active:scale-95 touch-manipulation"
-  style={{ 
-    WebkitTapHighlightColor: 'transparent',
-    userSelect: 'none'
-  }}
-  onTouchStart={(e) => {
-    // Prevent double-tap zoom on iOS
-    e.preventDefault();
-    // Add immediate visual feedback
-    e.currentTarget.style.transform = 'scale(0.95)';
-  }}
-  onTouchEnd={(e) => {
-    // Reset transform
-    setTimeout(() => {
-      e.currentTarget.style.transform = '';
-    }, 150);
-  }}
->
-  <span className="flex items-center justify-center gap-2">
-    <svg 
-      className="w-4 h-4 sm:w-5 sm:h-5 group-hover:animate-bounce" 
-      fill="none" 
-      stroke="currentColor" 
-      viewBox="0 0 24 24"
-    >
-      <path 
-        strokeLinecap="round" 
-        strokeLinejoin="round" 
-        strokeWidth={2} 
-        d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" 
-      />
-    </svg>
-    Download Resume
-  </span>
-</a>
+                <a
+                  href="/resume.pdf"
+                  download="Nirvisha_Soni_Resume.pdf"
+                  className="group border-2 border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:border-purple-500 dark:hover:border-purple-400 hover:text-purple-600 dark:hover:text-purple-400 px-6 sm:px-8 py-3 sm:py-4 rounded-xl font-semibold transition-all duration-300 backdrop-blur-sm w-full sm:w-auto text-sm sm:text-base inline-block text-center active:scale-95 touch-manipulation max-w-xs sm:max-w-none"
+                  style={{ 
+                    WebkitTapHighlightColor: 'transparent',
+                    userSelect: 'none'
+                  }}
+                  onTouchStart={(e) => {
+                    // Prevent double-tap zoom on iOS
+                    e.preventDefault();
+                    // Add immediate visual feedback
+                    e.currentTarget.style.transform = 'scale(0.95)';
+                  }}
+                  onTouchEnd={(e) => {
+                    // Reset transform
+                    setTimeout(() => {
+                      e.currentTarget.style.transform = '';
+                    }, 150);
+                  }}
+                >
+                  <span className="flex items-center justify-center gap-2">
+                    <svg 
+                      className="w-4 h-4 sm:w-5 sm:h-5 group-hover:animate-bounce" 
+                      fill="none" 
+                      stroke="currentColor" 
+                      viewBox="0 0 24 24"
+                    >
+                      <path 
+                        strokeLinecap="round" 
+                        strokeLinejoin="round" 
+                        strokeWidth={2} 
+                        d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" 
+                      />
+                    </svg>
+                    Download Resume
+                  </span>
+                </a>
               </div>
               
               {/* Social Links */}
