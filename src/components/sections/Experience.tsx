@@ -53,11 +53,11 @@ export function Experience() {
       current: true,
       description: "Working on RNA-binding protein (RBP) binding site prediction using advanced ML techniques",
       highlights: [
-        "Extracting protein sequence embeddings using ESM3 and building downstream ML classifiers (MLP, CNNs)",
+        "Extracting protein sequence embeddings using ESM3 and building downstream ML classifiers (CNNs, XGBoost, SVM)",
         "Preprocessed and standardized biological datasets (FASTA format) for training/testing",
-        "Conducted performance evaluation using F1-score, ROC-AUC, MCC, and robustness tests"
+        "Conducted comprehensive model evaluation using F1-score, ROC-AUC, MCC, and cross-validation techniques"
       ],
-      skills: ["Python", "ESM3", "CNNs", "MLPs", "Bioinformatics"],
+      skills: ["Python", "ESM3", "CNNs", "XGBoost", "SVM", "Bioinformatics"],
       logo: "/images/uf-logo-2.png",
       color: "from-purple-500 to-indigo-600"
     },
@@ -67,13 +67,13 @@ export function Experience() {
       company: "University of Florida",
       location: "Gainesville, FL", 
       duration: "January 2025 – May 2025",
-      type: "Teaching",
+      type: "Teaching Assistant",
       current: false,
-      description: "Mentored students and automated grading workflows for compiler design courses",
+      description: "Mentored students and automated grading workflows for COP5556 - Programming Language Principles by Dr. Alin Dobra",
       highlights: [
-        "Mentored 200+ students on logic-driven problem-solving & debugging for compiler design",
-        "Built Python & JavaScript scripts to automate grading workflows",
-        "Improved evaluation consistency & turnaround speed significantly"
+        "Mentored 200+ students on compiler design, regex, and type inference concepts",
+        "Developed Python/JavaScript scripts to automate grading workflows,  reducing grading time by 80%",
+        "Created standardized assignments and rubrics to enhance learning outcomes and streamline assessment"
       ],
       skills: ["Python", "JavaScript", "Teaching", "Automation"],
       logo: "/images/uf-logo-2.png",
@@ -82,16 +82,16 @@ export function Experience() {
     {
       id: 3,
       title: "Graduate Analyst",
-      company: "Barclays Global Service Centre",
+      company: "Barclays",
       location: "Pune, India",
       duration: "July 2023 – July 2024",
       type: "Industry",
       current: false,
-      description: "Optimized trade data processing and automated post-trade validation systems",
+      description: "Developed serverless pipelines and automation frameworks for financial data processing",
       highlights: [
-        "Wrote optimized SQL scripts to audit and cleanse high-volume trade data",
-        "Designed serverless AWS Lambda pipeline for post-trade validation",
-        "Reduced manual intervention by 60% and accelerated settlement workflows"
+        "Wrote optimized SQL scripts for high-volume trade data auditing, ensuring regulatory compliance and reliable reporting",
+        "Built AWS Lambda pipeline that reduced manual log analysis by 60% and enabled real-time trade verification",
+        "Designed Python/Selenium automation framework reducing manual testing by 80% and improving precision by 25%"
       ],
       skills: ["SQL", "AWS Lambda", "Data Processing", "Financial Systems"],
       logo: "/images/barclays-logo.png",
@@ -107,9 +107,9 @@ export function Experience() {
       current: false,
       description: "Developed ML models for financial news analysis and sentiment prediction",
       highlights: [
-        "Used transformer-based models (T5, Pegasus) for financial news summarization",
-        "Conducted topic modeling on 5,000+ financial articles using LDA and BERTopic",
-        "Achieved Pearson correlation of 0.7 for news sentiment vs stock price analysis"
+        "Implemented transformer-based models (T5, Pegasus) for financial news summarization, improving content clarity by 10% using ROUGE metrics",
+        "Conducted topic modeling on 5,000+ financial articles using LDA and BERTopic to extract market-relevant investment themes",
+        "Built sentiment analysis model correlating financial news with stock price movements, achieving 0.7 Pearson correlation through rolling window analysis"
       ],
       skills: ["Transformers", "T5", "Pegasus", "LDA", "BERTopic", "Financial Analysis"],
       logo: "/images/algoanalytics-logo.png",
