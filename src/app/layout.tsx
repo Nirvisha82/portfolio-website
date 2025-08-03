@@ -17,33 +17,40 @@ export default function RootLayout({
       <head>
         {/* MINIMAL Safari fix - just CSS */}
         {/* COMPLETE FIX - Constellation + Safari Mobile */}
-        <script dangerouslySetInnerHTML={{
-          __html: `
-            (function() {
-              try {
-                const theme = localStorage.getItem('theme');
-                const isDark = theme === 'dark' || (theme !== 'light' && window.matchMedia('(prefers-color-scheme: dark)').matches);
-                
-                if (isDark) {
-                  document.documentElement.classList.add('dark');
-                }
-                
-                // ONLY Safari mobile gets forced background
-                const isSafariMobile = /^((?!chrome|android).)*safari/i.test(navigator.userAgent) && /iPhone|iPad|iPod/i.test(navigator.userAgent);
-                
-                if (isSafariMobile) {
-                  if (isDark) {
-                    document.documentElement.style.background = 'linear-gradient(135deg, #0f0b27 0%, #1a1332 25%, #231944 50%, #1a1332 75%, #0f0b27 100%)';
-                  } else {
-                    document.documentElement.style.background = 'linear-gradient(135deg, #ffffff 0%, #f8fafc 25%, #f1f5f9 50%, #f8fafc 75%, #ffffff 100%)';
-                  }
-                }
-              } catch (e) {
-                // Silent fail
-              }
-            })();
-          `
-        }} />
+<script dangerouslySetInnerHTML={{
+  __html: `
+    (function() {
+      try {
+        const theme = localStorage.getItem('theme');
+        
+        // If they have a saved preference, use it (returning user)
+        if (theme === 'light' || theme === 'dark') {
+          if (theme === 'dark') {
+            document.documentElement.classList.add('dark');
+          }
+        } else {
+          // First-time visitor - always start with dark mode
+          document.documentElement.classList.add('dark');
+        }
+        
+        // ONLY Safari mobile gets forced background
+        const isSafariMobile = /^((?!chrome|android).)*safari/i.test(navigator.userAgent) && /iPhone|iPad|iPod/i.test(navigator.userAgent);
+        
+        if (isSafariMobile) {
+          const isDark = theme === 'dark' || !theme; // Default to dark for new users
+          if (isDark) {
+            document.documentElement.style.background = 'linear-gradient(135deg, #0f0b27 0%, #1a1332 25%, #231944 50%, #1a1332 75%, #0f0b27 100%)';
+          } else {
+            document.documentElement.style.background = 'linear-gradient(135deg, #ffffff 0%, #f8fafc 25%, #f1f5f9 50%, #f8fafc 75%, #ffffff 100%)';
+          }
+        }
+      } catch (e) {
+        // Fallback to dark mode for new users
+        document.documentElement.classList.add('dark');
+      }
+    })();
+  `
+}} />
 
         <style dangerouslySetInnerHTML={{
           __html: `
