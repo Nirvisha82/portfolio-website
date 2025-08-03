@@ -19,11 +19,17 @@ export default function RootLayout({
         <style dangerouslySetInnerHTML={{
           __html: `
             html { 
-              color-scheme: light; 
-              background: linear-gradient(135deg, #ffffff 0%, #f8fafc 25%, #f1f5f9 50%, #f8fafc 75%, #ffffff 100%) !important;
+              color-scheme: light;
             }
             html.dark { 
-              color-scheme: dark; 
+              color-scheme: dark;
+            }
+            
+            /* Only override body background, not html - this preserves constellation elements */
+            body { 
+              background: linear-gradient(135deg, #ffffff 0%, #f8fafc 25%, #f1f5f9 50%, #f8fafc 75%, #ffffff 100%) !important;
+            }
+            html.dark body { 
               background: linear-gradient(135deg, #0f0b27 0%, #1a1332 25%, #231944 50%, #1a1332 75%, #0f0b27 100%) !important;
             }
             
