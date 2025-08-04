@@ -17,19 +17,37 @@ export const metadata: Metadata = {
       follow: true,
     },
   },
+  icons: {
+    icon: [
+      { url: '/favicon.ico', sizes: 'any' },
+      { url: '/icon-192.png', sizes: '192x192', type: 'image/png' },
+      { url: '/icon-512.png', sizes: '512x512', type: 'image/png' }
+    ],
+    apple: '/apple-icon.png',
+    shortcut: '/favicon.ico'
+  },
   openGraph: {
     title: "Nirvisha Soni - Portfolio",
     description: "Computer Science student and developer specializing in backend systems and AI solutions. Published researcher with industry experience.",
     url: "https://nirvishasoni.dev",
-    siteName: "Nirvisha Soni Portfolio",
+    siteName: "Nirvisha Soni - Portfolio",
     type: "website",
     locale: "en_US",
+    images: [
+      {
+        url: '/icon-512.png',
+        width: 512,
+        height: 512,
+        alt: 'Nirvisha Soni - Portfolio'
+      }
+    ]
   },
   twitter: {
     card: "summary_large_image",
-    title: "Nirvisha Soni - Backend Developer & AI Engineer",
+    title: "Nirvisha Soni - Portfolio",
     description: "Computer Science student and developer specializing in backend systems and AI solutions.",
     creator: "@nirvishaaa", // If you have Twitter
+    images: ['/icon-512.png']
   },
   alternates: {
     canonical: "https://nirvishasoni.dev",
@@ -45,49 +63,49 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       
       <head>
+        {/* Additional favicon links for maximum compatibility */}
+        <link rel="icon" href="/favicon.ico" sizes="any" />
+        <link rel="apple-touch-icon" href="/apple-icon.png" />
+        <link rel="manifest" href="/site.webmanifest" />
 
         <script
-  type="application/ld+json"
-  dangerouslySetInnerHTML={{
-    __html: JSON.stringify({
-      "@context": "https://schema.org",
-      "@type": "Person",
-      "name": "Nirvisha Soni",
-      "jobTitle": "Backend Developer & AI Engineer",
-      "description": "Computer Science student specializing in backend development and AI solutions",
-      "url": "https://nirvishasoni.dev",
-      "image": "https://nirvishasoni.dev/images/nirvisha.png",
-      "sameAs": [
-        "https://linkedin.com/in/nirvishasoni",
-        "https://github.com/Nirvisha82",
-        "https://scholar.google.com/citations?user=levmF9MAAAAJ&hl=en"
-      ],
-      "knowsAbout": [
-        "Backend Development",
-        "Artificial Intelligence",
-        "Machine Learning",
-        "Python",
-        "Go",
-        "React",
-        "Software Engineering"
-      ],
-      "alumniOf": [
-        {
-          "@type": "CollegeOrUniversity",
-          "name": "University of Florida"
-        },
-        {
-          "@type": "CollegeOrUniversity", 
-          "name": "Vishwakarma Institute of Technology"
-        }
-      ]
-    })
-  }}
-/>
-
-{/* Favicon */}
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><defs><linearGradient id='g' x1='0%' y1='0%' x2='100%' y2='100%'><stop offset='0%' stop-color='%236d28d9'/><stop offset='100%' stop-color='%232563eb'/></linearGradient></defs><rect width='32' height='32' rx='6' fill='url(%23g)'/><text x='16' y='22' text-anchor='middle' fill='white' font-family='Arial,sans-serif' font-size='18' font-weight='bold'>N</text></svg>" />
-        
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Person",
+              "name": "Nirvisha Soni",
+              "jobTitle": "Backend Developer & AI Engineer",
+              "description": "Computer Science student specializing in backend development and AI solutions",
+              "url": "https://nirvishasoni.dev",
+              "image": "https://nirvishasoni.dev/icon-512.png",
+              "sameAs": [
+                "https://linkedin.com/in/nirvishasoni",
+                "https://github.com/Nirvisha82",
+                "https://scholar.google.com/citations?user=levmF9MAAAAJ&hl=en"
+              ],
+              "knowsAbout": [
+                "Backend Development",
+                "Artificial Intelligence",
+                "Machine Learning",
+                "Python",
+                "Go",
+                "React",
+                "Software Engineering"
+              ],
+              "alumniOf": [
+                {
+                  "@type": "CollegeOrUniversity",
+                  "name": "University of Florida"
+                },
+                {
+                  "@type": "CollegeOrUniversity", 
+                  "name": "Vishwakarma Institute of Technology"
+                }
+              ]
+            })
+          }}
+        />
         
         {/* SINGLE UNIFIED SCRIPT - Dark Mode First + Safari Fix */}
         <script dangerouslySetInnerHTML={{
