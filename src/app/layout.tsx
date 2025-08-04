@@ -18,7 +18,7 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: "Nirvisha Soni - Backend Developer & AI Engineer",
+    title: "Nirvisha Soni - Portfolio",
     description: "Computer Science student and developer specializing in backend systems and AI solutions. Published researcher with industry experience.",
     url: "https://nirvishasoni.dev",
     siteName: "Nirvisha Soni Portfolio",
