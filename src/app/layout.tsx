@@ -3,17 +3,38 @@ import "./globals.css";
 import { Providers } from '@/providers'
 
 export const metadata: Metadata = {
-  title: "Nirvisha Soni - Portfolio | Backend Developer & AI Engineer",
-  description: "Nirvisha Soni - Computer Science student, backend developer, and AI engineer. Published researcher with experience at University of Florida and Barclays. Specializing in Python, Go, React, and machine learning.",
-  keywords: "Nirvisha Soni, backend developer, AI engineer, computer science, University of Florida, machine learning, Python, Go, React",
+  title: "Nirvisha Soni - Portfolio",
+  description: "Nirvisha Soni - Computer Science graduate student at University of Florida. Backend developer and AI engineer with published research, experience at Barclays. Specializing in Python, Go, React, and machine learning.",
+  keywords: "Nirvisha Soni, backend developer, AI engineer, computer science, University of Florida, machine learning, Python, Go, React, software engineer, full stack developer",
   authors: [{ name: "Nirvisha Soni" }],
-  openGraph: {
-    title: "Nirvisha Soni - Portfolio",
-    description: "Backend Developer & AI Engineer",
-    url: "https://nirvishasoni.vercel.app",
-    type: "website",
+  creator: "Nirvisha Soni",
+  publisher: "Nirvisha Soni",
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+    },
   },
-}
+  openGraph: {
+    title: "Nirvisha Soni - Backend Developer & AI Engineer",
+    description: "Computer Science student and developer specializing in backend systems and AI solutions. Published researcher with industry experience.",
+    url: "https://nirvishasoni.dev",
+    siteName: "Nirvisha Soni Portfolio",
+    type: "website",
+    locale: "en_US",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Nirvisha Soni - Backend Developer & AI Engineer",
+    description: "Computer Science student and developer specializing in backend systems and AI solutions.",
+    creator: "@nirvishaaa", // If you have Twitter
+  },
+  alternates: {
+    canonical: "https://nirvishasoni.dev",
+  },
+};
 
 export default function RootLayout({
   children,
@@ -24,6 +45,45 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       
       <head>
+
+        <script
+  type="application/ld+json"
+  dangerouslySetInnerHTML={{
+    __html: JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Nirvisha Soni",
+      "jobTitle": "Backend Developer & AI Engineer",
+      "description": "Computer Science student specializing in backend development and AI solutions",
+      "url": "https://nirvishasoni.dev",
+      "image": "https://nirvishasoni.dev/images/nirvisha.png",
+      "sameAs": [
+        "https://linkedin.com/in/nirvishasoni",
+        "https://github.com/Nirvisha82",
+        "https://scholar.google.com/citations?user=levmF9MAAAAJ&hl=en"
+      ],
+      "knowsAbout": [
+        "Backend Development",
+        "Artificial Intelligence",
+        "Machine Learning",
+        "Python",
+        "Go",
+        "React",
+        "Software Engineering"
+      ],
+      "alumniOf": [
+        {
+          "@type": "CollegeOrUniversity",
+          "name": "University of Florida"
+        },
+        {
+          "@type": "CollegeOrUniversity", 
+          "name": "Vishwakarma Institute of Technology"
+        }
+      ]
+    })
+  }}
+/>
 
 {/* Favicon */}
         <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><defs><linearGradient id='g' x1='0%' y1='0%' x2='100%' y2='100%'><stop offset='0%' stop-color='%236d28d9'/><stop offset='100%' stop-color='%232563eb'/></linearGradient></defs><rect width='32' height='32' rx='6' fill='url(%23g)'/><text x='16' y='22' text-anchor='middle' fill='white' font-family='Arial,sans-serif' font-size='18' font-weight='bold'>N</text></svg>" />
