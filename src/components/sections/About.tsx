@@ -54,7 +54,7 @@ export function About() {
             About Me
           </span>
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 dark:text-white mb-3 sm:mb-4">
-            Get to know me better
+            Lines Between the Code
           </h2>
           <p className="text-sm sm:text-base text-gray-600 dark:text-gray-300 max-w-2xl mx-auto px-4">
             Always learning, always building, always growing
