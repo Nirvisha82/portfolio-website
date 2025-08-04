@@ -3,9 +3,17 @@ import "./globals.css";
 import { Providers } from '@/providers'
 
 export const metadata: Metadata = {
-  title: "Nirvisha Soni - Portfolio",
-  description: "Computer Science student passionate about backend development and AI",
-};
+  title: "Nirvisha Soni - Portfolio | Backend Developer & AI Engineer",
+  description: "Nirvisha Soni - Computer Science student, backend developer, and AI engineer. Published researcher with experience at University of Florida and Barclays. Specializing in Python, Go, React, and machine learning.",
+  keywords: "Nirvisha Soni, backend developer, AI engineer, computer science, University of Florida, machine learning, Python, Go, React",
+  authors: [{ name: "Nirvisha Soni" }],
+  openGraph: {
+    title: "Nirvisha Soni - Portfolio",
+    description: "Backend Developer & AI Engineer",
+    url: "https://nirvishasoni.vercel.app",
+    type: "website",
+  },
+}
 
 export default function RootLayout({
   children,
