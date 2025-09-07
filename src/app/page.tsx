@@ -212,7 +212,7 @@ export default function Home() {
                 
                 <a
                   href="/Nirvisha_Soni_Resume.pdf"
-                  download="Nirvisha_Soni_Resume.pdf"
+                  download="Nirvisha_Soni.pdf"
                   className="group border-2 border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:border-purple-500 dark:hover:border-purple-400 hover:text-purple-600 dark:hover:text-purple-400 px-6 sm:px-8 py-3 sm:py-4 rounded-xl font-semibold transition-all duration-300 backdrop-blur-sm w-full sm:w-auto text-sm sm:text-base inline-block text-center active:scale-95 touch-manipulation max-w-xs sm:max-w-none"
                   style={{ 
                     WebkitTapHighlightColor: 'transparent',
