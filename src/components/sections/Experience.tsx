@@ -45,24 +45,44 @@ export function Experience() {
   const experiences = [
     {
       id: 1,
-      title: "Research Assistant",
-      company: "Xiao Fan Lab - University of Florida",
+      title: "AI Software Developer",
+      company: "UF IC3 - University of Florida",
       location: "Gainesville, FL",
-      duration: "June 2025 – Present",
-      type: "Research",
+      duration: "Aug 2025 – Present",
+      type: "Applied AI Engineering",
       current: true,
-      description: "Working on RNA-binding protein (RBP) binding site prediction using advanced ML techniques",
+      description: "Driving R&D on an end-to-end RAG pipeline for the Hospital Digital Twin project using UF Shands data",
       highlights: [
-        "Extracting protein sequence embeddings using ESM3 and building downstream ML classifiers (CNNs, XGBoost, SVM)",
-        "Preprocessed and standardized biological datasets (FASTA format) for training/testing",
-        "Conducted comprehensive model evaluation using F1-score, ROC-AUC, MCC, and cross-validation techniques"
+        "Designing and implementing a personalized RAG pipeline to power a virtual clinical avatar",
+        "Building a modular ingestion and indexing framework (CSV, DOCX, PDF, TXT, Images) with ChromaDB",
+        "Integrating retrieval framework with web search for accurate, context-aware clinical support",
+        "Implementing PHI redaction, hallucination detection, and HIPAA-aligned guardrails to ensure compliance"
       ],
-      skills: ["Python", "ESM3", "CNNs", "XGBoost", "SVM", "Bioinformatics"],
-      logo: "/images/uf-logo-2.png",
-      color: "from-purple-500 to-indigo-600"
+      skills: ["Python", "LangChain", "FAISS", "ChromaDB", "HIPAA Compliance"],
+      logo: "/images/ic3-logo.png",
+      color: "from-blue-500 to-cyan-600"
     },
     {
       id: 2,
+      title: "Software Engineer Apprentice",
+      company: "American Express",
+      location: "Florida",
+      duration: "Aug 2025 – Present",
+      type: "Apprenticeship",
+      current: true,
+      description: "Shadowing a senior developer under WiCSE’s program while contributing to workflow automation R&D",
+      highlights: [
+        "Building a GitHub automation bot in Go that streamlines issue-to-PR workflows through branch creation, PR templates, and reviewer assignment",
+        "Implementing repository-wide governance checks (naming conventions, approvals, test requirements) to enforce standards",
+        "Researching advanced features including flaky test detection and duplicate issue resolution, with planned extension to GitLab"
+      ],
+      skills: ["Go", "GitHub API", "CI/CD", "Software Automation"],
+      logo: "/images/amex-logo.png",
+      color: "from-indigo-500 to-purple-600"
+   },
+
+    {
+      id: 3,
       title: "Graduate Student Assistant",
       company: "University of Florida",
       location: "Gainesville, FL", 
@@ -80,7 +100,7 @@ export function Experience() {
       color: "from-blue-500 to-cyan-600"
     },
     {
-      id: 3,
+      id: 4,
       title: "Graduate Analyst",
       company: "Barclays",
       location: "Pune, India",
@@ -98,7 +118,7 @@ export function Experience() {
       color: "from-green-500 to-emerald-600"
     },
     {
-      id: 4,
+      id: 5,
       title: "Machine Learning Intern",
       company: "AlgoAnalytics Private Limited",
       location: "Pune, India",
