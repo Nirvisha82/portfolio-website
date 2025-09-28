@@ -91,10 +91,10 @@ export function Footer() {
                 Nirvisha Soni
               </h3>
               <p className="text-base sm:text-lg text-gray-600 dark:text-gray-300 mb-3 sm:mb-4">
-                Backend Developer & AI Engineer
+                Software Developer
               </p>
               <p className="text-sm sm:text-base text-gray-500 dark:text-gray-400 leading-relaxed">
-                Passionate about creating scalable systems and AI-powered solutions.
+                Passionate about creating scalable backend systems and AI-powered solutions.
               </p>
             </div>
 

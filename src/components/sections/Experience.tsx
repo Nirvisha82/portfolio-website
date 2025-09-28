@@ -51,14 +51,14 @@ export function Experience() {
       duration: "Aug 2025 – Present",
       type: "Applied AI Engineering",
       current: true,
-      description: "Driving R&D on an end-to-end RAG pipeline for the Hospital Digital Twin project using UF Shands data",
+      description: "Developing an agentic, multimodal RAG pipeline for UF Shands Digital Twin project",
       highlights: [
-        "Designing and implementing a personalized RAG pipeline to power a virtual clinical avatar",
-        "Building a modular ingestion and indexing framework (CSV, DOCX, PDF, TXT, Images) with ChromaDB",
-        "Integrating retrieval framework with web search for accurate, context-aware clinical support",
-        "Implementing PHI redaction, hallucination detection, and HIPAA-aligned guardrails to ensure compliance"
+        "Architected RAG pipeline processing 20K+ clinical documents with cross-modal reasoning (text, images, tables)",
+        "Built hybrid retrieval system combining vector search + external knowledge, boosting clinical query accuracy by 30%",
+        "Implemented HIPAA-compliant guardrails with PHI redaction and hallucination detection",
+        "Developed automated tests to validate retrieval accuracy and cut query latency by 20%"
       ],
-      skills: ["Python", "LangChain", "FAISS", "ChromaDB", "HIPAA Compliance"],
+      skills: ["Python", "LangChain", "Vector Databases", "LLMs", "HIPAA Compliance"],
       logo: "/images/ic3-logo.png",
       color: "from-blue-500 to-cyan-600"
     },
@@ -70,68 +70,50 @@ export function Experience() {
       duration: "Aug 2025 – Present",
       type: "Apprenticeship",
       current: true,
-      description: "Shadowing a senior developer under WiCSE’s program while contributing to workflow automation R&D",
+      description: "Building a GitHub automation app to streamline enterprise development workflows",
       highlights: [
-        "Building a GitHub automation bot in Go that streamlines issue-to-PR workflows through branch creation, PR templates, and reviewer assignment",
-        "Implementing repository-wide governance checks (naming conventions, approvals, test requirements) to enforce standards",
-        "Researching advanced features including flaky test detection and duplicate issue resolution, with planned extension to GitLab"
+        "Built GitHub App in Go that auto-creates branches, generates PR templates, and suggests file changes, saving 40% developer setup time",
+        "Designed repo-aware LLM workflow integrating static analysis + embeddings to identify impacted files and propose precise code modifications",
+        "Implemented end-to-end issue→branch→PR pipeline, cutting issue-to-PR turnaround by 25%"
       ],
-      skills: ["Go", "GitHub API", "CI/CD", "Software Automation"],
+      skills: ["Go", "GitHub API", "CI/CD", "LLMs", "Developer Productivity"],
       logo: "/images/amex-logo.png",
       color: "from-indigo-500 to-purple-600"
-   },
-
-    {
-      id: 3,
-      title: "Graduate Student Assistant",
-      company: "University of Florida",
-      location: "Gainesville, FL", 
-      duration: "January 2025 – May 2025",
-      type: "Teaching Assistant",
-      current: false,
-      description: "Mentored students and automated grading workflows for COP5556 - Programming Language Principles by Dr. Alin Dobra",
-      highlights: [
-        "Mentored 200+ students on compiler design, regex, and type inference concepts",
-        "Developed Python/JavaScript scripts to automate grading workflows,  reducing grading time by 80%",
-        "Created standardized assignments and rubrics to enhance learning outcomes and streamline assessment"
-      ],
-      skills: ["Python", "JavaScript", "Teaching", "Automation"],
-      logo: "/images/uf-logo-2.png",
-      color: "from-blue-500 to-cyan-600"
     },
     {
-      id: 4,
+      id: 3,
       title: "Graduate Analyst",
       company: "Barclays",
       location: "Pune, India",
       duration: "July 2023 – July 2024",
       type: "Industry",
       current: false,
-      description: "Developed serverless pipelines and automation frameworks for financial data processing",
+      description: "Delivered backend microservices and data pipelines for global trading systems",
       highlights: [
-        "Wrote optimized SQL scripts for high-volume trade data auditing, ensuring regulatory compliance and reliable reporting",
-        "Built AWS Lambda pipeline that reduced manual log analysis by 60% and enabled real-time trade verification",
-        "Designed Python/Selenium automation framework reducing manual testing by 80% and improving precision by 25%"
+        "Built Spring Boot microservices for trading platform processing $2B+ daily transactions with 99.9% uptime",
+        "Developed REST APIs integrating live market data, achieving sub-millisecond latency and reducing order errors by 15%",
+        "Implemented Azure Event Hubs + Kafka pipelines, cutting reporting time by 20% and improving trader insights",
+        "Automated post-trade validation with AWS Lambda workflows, reducing manual intervention by 60%"
       ],
-      skills: ["SQL", "AWS Lambda", "Data Processing", "Financial Systems"],
+      skills: ["Java", "Spring Boot", "REST APIs", "Kafka", "AWS Lambda", "Azure Event Hubs"],
       logo: "/images/barclays-logo.png",
       color: "from-green-500 to-emerald-600"
     },
     {
-      id: 5,
+      id: 4,
       title: "Machine Learning Intern",
       company: "AlgoAnalytics Private Limited",
       location: "Pune, India",
-      duration: "January 2023 – April 2023", 
+      duration: "Jan 2023 – Apr 2023",
       type: "Internship",
       current: false,
-      description: "Developed ML models for financial news analysis and sentiment prediction",
+      description: "Built NLP models for topic modeling, summarization, and sentiment prediction on financial data",
       highlights: [
-        "Implemented transformer-based models (T5, Pegasus) for financial news summarization, improving content clarity by 10% using ROUGE metrics",
-        "Conducted topic modeling on 5,000+ financial articles using LDA and BERTopic to extract market-relevant investment themes",
-        "Built sentiment analysis model correlating financial news with stock price movements, achieving 0.7 Pearson correlation through rolling window analysis"
+        "Conducted topic modeling on 5K+ financial articles, enabling production topic-based search",
+        "Developed transformer-based summarization models, improving content clarity by 10%",
+        "Built sentiment analysis model correlating financial news with stock movements (Pearson r = 0.7)"
       ],
-      skills: ["Transformers", "T5", "Pegasus", "LDA", "BERTopic", "Financial Analysis"],
+      skills: ["Transformers", "NLP", "Topic Modeling", "Summarization", "Sentiment Analysis"],
       logo: "/images/algoanalytics-logo.png",
       color: "from-orange-500 to-red-600"
     }

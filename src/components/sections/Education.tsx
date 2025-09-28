@@ -51,7 +51,7 @@ export function Education() {
         "Member - Women in Computer Science and Engineering (WiCSE), UF",
       ],
       relevantCourses: [
-        "Advanced Data Structures", "Math for Intelligent Systems","Machine Learning", "Natural Language Processing", "Distributed Systems", "Software Engineering"
+        "Advanced Data Structures", "Analysis of Algorithms", "Distributed Systems", "Math for Intelligent Systems","Machine Learning", "Natural Language Processing",  "Bioinformatics"
       ],
       color: "purple",
       logo: "UF"
