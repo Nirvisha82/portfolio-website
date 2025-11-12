@@ -1,0 +1,208 @@
+{
+  "nodes": [
+    {
+      "file": ".gitignore",
+      "language": "",
+      "dependencies": [],
+      "exports": [],
+      "imports": []
+    },
+    {
+      "file": "README.md",
+      "language": "markdown",
+      "dependencies": [],
+      "exports": [],
+      "imports": []
+    },
+    {
+      "file": "eslint.config.mjs",
+      "language": "",
+      "dependencies": [],
+      "exports": [],
+      "imports": []
+    },
+    {
+      "file": "next.config.ts",
+      "language": "typescript",
+      "dependencies": [],
+      "exports": [],
+      "imports": [
+        "next"
+      ]
+    },
+    {
+      "file": "package.json",
+      "language": "json",
+      "dependencies": [],
+      "exports": [],
+      "imports": []
+    },
+    {
+      "file": "postcss.config.js",
+      "language": "javascript",
+      "dependencies": [],
+      "exports": [],
+      "imports": []
+    },
+    {
+      "file": "postcss.config.mjs",
+      "language": "",
+      "dependencies": [],
+      "exports": [],
+      "imports": []
+    },
+    {
+      "file": "public/google59538ecd12158324.html",
+      "language": "html",
+      "dependencies": [],
+      "exports": [],
+      "imports": []
+    },
+    {
+      "file": "public/robots.txt",
+      "language": "",
+      "dependencies": [],
+      "exports": [],
+      "imports": []
+    },
+    {
+      "file": "public/site.webmanifest",
+      "language": "",
+      "dependencies": [],
+      "exports": [],
+      "imports": []
+    },
+    {
+      "file": "src/app/globals.css",
+      "language": "css",
+      "dependencies": [],
+      "exports": [],
+      "imports": []
+    },
+    {
+      "file": "src/app/layout.tsx",
+      "language": "tsx",
+      "dependencies": [],
+      "exports": [],
+      "imports": []
+    },
+    {
+      "file": "src/app/page.tsx",
+      "language": "tsx",
+      "dependencies": [],
+      "exports": [],
+      "imports": []
+    },
+    {
+      "file": "src/app/sitemap.ts",
+      "language": "typescript",
+      "dependencies": [],
+      "exports": [],
+      "imports": [
+        "next"
+      ]
+    },
+    {
+      "file": "src/components/layout/Footer.tsx",
+      "language": "tsx",
+      "dependencies": [],
+      "exports": [],
+      "imports": []
+    },
+    {
+      "file": "src/components/layout/Navigation.tsx",
+      "language": "tsx",
+      "dependencies": [],
+      "exports": [],
+      "imports": []
+    },
+    {
+      "file": "src/components/sections/About.tsx",
+      "language": "tsx",
+      "dependencies": [],
+      "exports": [],
+      "imports": []
+    },
+    {
+      "file": "src/components/sections/Education.tsx",
+      "language": "tsx",
+      "dependencies": [],
+      "exports": [],
+      "imports": []
+    },
+    {
+      "file": "src/components/sections/Experience.tsx",
+      "language": "tsx",
+      "dependencies": [],
+      "exports": [],
+      "imports": []
+    },
+    {
+      "file": "src/components/sections/Projects.tsx",
+      "language": "tsx",
+      "dependencies": [],
+      "exports": [],
+      "imports": []
+    },
+    {
+      "file": "src/components/sections/Research.tsx",
+      "language": "tsx",
+      "dependencies": [],
+      "exports": [],
+      "imports": []
+    },
+    {
+      "file": "src/components/sections/Skills.tsx",
+      "language": "tsx",
+      "dependencies": [],
+      "exports": [],
+      "imports": []
+    },
+    {
+      "file": "src/components/ui/ThemeToggle.tsx",
+      "language": "tsx",
+      "dependencies": [],
+      "exports": [],
+      "imports": []
+    },
+    {
+      "file": "src/contexts/ThemeContext.tsx",
+      "language": "tsx",
+      "dependencies": [],
+      "exports": [],
+      "imports": []
+    },
+    {
+      "file": "src/hooks/userScrollAnimation.ts",
+      "language": "typescript",
+      "dependencies": [],
+      "exports": [],
+      "imports": [
+        "react"
+      ]
+    },
+    {
+      "file": "src/providers.tsx",
+      "language": "tsx",
+      "dependencies": [],
+      "exports": [],
+      "imports": []
+    },
+    {
+      "file": "tailwind.config.js",
+      "language": "javascript",
+      "dependencies": [],
+      "exports": [],
+      "imports": []
+    },
+    {
+      "file": "tsconfig.json",
+      "language": "json",
+      "dependencies": [],
+      "exports": [],
+      "imports": []
+    }
+  ],
+  "generated_at": "2025-11-12T17:55:37.4884294-05:00",
+  "repo_url": ""
+}
